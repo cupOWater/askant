@@ -1,8 +1,15 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ForumHome from "./components/ForumHome";
+
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route exact path="/" element={<ForumHome />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
