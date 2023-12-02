@@ -10,10 +10,8 @@ function Register({ userType, user }) {
     const fakeUserType = ""; // MUST delete after backend work is done; dummy
     const fakeUsername = "Tony1234";  // MUST delete after backend work is done; dummy
 
-    const [ID, setID] = useState(""); // Entered username(ID)
-    // const [email, setEmail] = useState("");
-    // const [phone, setPhone] = useState("");
-    // const [address, setAddress] = useState("");
+    const [userName, setUserName] = useState(""); // Entered username(ID)
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState(""); // Entered password
     
     return (
@@ -32,7 +30,7 @@ function Register({ userType, user }) {
                 //onSubmit={register} -> register process; make sure it should be functioned on backend work!
                 className="row">
                     <div className="mb-3">
-                        <label className="form-label">Username (ID)<span>*</span></label>
+                        <label className="form-label">Username<span>*</span></label>
                         <input 
                             className="form-control" 
                             id="userName"
@@ -40,12 +38,12 @@ function Register({ userType, user }) {
                             placeholder="Enter your username (ID)..."  
                             minLength="5" maxLength="12" 
                             title="Username length must be from 5 to 12." 
-                            onChange={(e) => setID(e.target.value)} 
-                            value={ID}
+                            onChange={(e) => setUserName(e.target.value)} 
+                            value={userName}
                             required
                         />
                     </div>
-                    {/* <div className="my-3 col-sm-6">
+                    <div className="mb-3">
                         <label className="form-label">Email<span>*</span></label>
                         <input 
                             className="form-control register-form" 
@@ -57,30 +55,6 @@ function Register({ userType, user }) {
                             required
                         />
                     </div>
-                    <div className="my-3 col-sm-6">
-                        <label className="form-label">Phone Number<span>*</span></label>
-                        <input 
-                            className="form-control phoneNumber" 
-                            id="userPhone" 
-                            type="number" 
-                            placeholder="Enter your phone number..." 
-                            onChange={(e) => setPhone(e.target.value)}
-                            value={phone}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Address<span>*</span></label>
-                        <input 
-                            className="form-control" 
-                            id="userAddress" 
-                            type="text" 
-                            placeholder="Enter your address..."  
-                            onChange={(e) => setAddress(e.target.value)}
-                            value={address}
-                            required
-                        />
-                    </div> */}
                     <div className="mb-5">
                         <label className="form-label">Password<span>*</span></label>
                         <input 
