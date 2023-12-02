@@ -2,15 +2,14 @@ require('dotenv').config();
 const database = require("./config/Database");
 const cors = require("cors")
 const express = require("express")
+const route = require("./routes/Routes")
 
 database.connect()
-
 const app = express()
 
 app.use(cors({origin: 'http://localhost:3000', credentials: true}));
+app.use(express.json())
 
-app.get("/test", (req, res) => {
-    res.send("Hello there, you have sent a request here. Nice Job!")
-})
+route(app)
 
 module.exports = app;
