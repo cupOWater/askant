@@ -1,0 +1,101 @@
+.unauthorized-container {
+    width: 800px;
+    height: 600px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -240px;
+    margin-left: -400px;
+    text-align: center;
+    box-shadow: 1px 1px 5px 1px #babbbc;
+    border-radius: 10px;
+}
+
+.unauthorized-text-container p {
+    margin-bottom: 0;
+    color: #939393;
+}
+
+.unauthorized-text-container h1 {
+    color: #fd6666;
+    font-weight: bold;
+}
+
+.unauthorized-img-container {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    background: url("../images/forbidden.jpg") no-repeat center;
+    background-size: cover;
+}
+
+.go-back-btn {
+    width: fit-content;
+    height: 40px;
+    border: none;
+    padding: 8px 35px;
+    border-radius: 40px;
+    background: #afde8b;
+    color: #4e4e4e;
+    font-weight: bold;
+
+    &:hover {
+        color: #fff;
+        box-shadow: 1px 1px 10px 3px #7d7d7d;
+        background-color: #198754;
+        transition: ease-in-out 0.3s;
+    }
+}
+
+.login-container {
+    text-align: start;
+    background-color: #fff;
+    padding: 20px 40px 40px 40px;
+}
+
+.login-btn {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 10px;
+    margin-top: -10px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+    &:hover {
+        background-color: lightgreen;
+        transition: ease-in-out 400ms;
+    }
+}
+
+.register-text {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    text-align: center;
+}
+
+.welcome-text {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.form-label {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.form-control {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:14px;
+}
+
+.loggedIn-text {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:26px;
+}
+
+.pt-5 {
+    text-align: center;
+}
+
+.registration-text {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
