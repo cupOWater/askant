@@ -54,6 +54,10 @@ li {
     &:hover {
         transition: ease-in-out 0.2s;
     }
+    &:hover img{
+        transition: ease-in-out 0.2s;
+        filter: invert(100%) sepia(1%) saturate(0%) hue-rotate(164deg) brightness(105%) contrast(100%);
+    }
 }
 
 a {

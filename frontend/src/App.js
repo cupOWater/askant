@@ -4,31 +4,42 @@
 // When user(Not an admin) logs in, it links to Homepage(Forum page).
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from 'react';
 import ForumHome from "./components/ForumHome";
 import Admin from "./components/Admin"
 import Header from "./components/Header";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthrozied";
+import { useEffect, useState } from "react";
+import { userService } from "./service/userService";
 
 function App() {
-  const [user, setUser] = useState({}); // info about logged user from database; username is ID
-  const username = "Admin" // MUST delete after backend done; dummy
-  const [userType, setUserType] = useState("User"); // "" -> Guest, "User" -> User
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (localStorage.getItem("aToken")) {
+      userService.getCurrent()
+        .then(res => {
+          if (res && res.status === 200) {
+            setUser(res.data);
+          }
+        })
+    }
+  }, [])
+
   return (
     <Router>
-      <Header userType={userType} username={user.username} />
+      <Header user={user} setUser={setUser} />
       <div className="App">
         <Routes>
           <Route exact path="/" element={<ForumHome />} />
 
-          <Route exact path="/logIn" element={<LogIn userType={userType} user={user} />} />
-          <Route exact path="/register" element={<Register userType={userType} user={user} />} />
+          <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />
+          <Route exact path="/register" element={<Register setUser={setUser} />} />
 
           <Route path='/unauth' element={<Unauthorized />} />
 
-          <Route path='/admin' element={(userType==="User" && username==="Admin")?<Admin />:<Unauthorized />} />
+          <Route path='/admin' element={(true) ? <Admin /> : <Unauthorized />} />
         </Routes>
       </div>
     </Router>

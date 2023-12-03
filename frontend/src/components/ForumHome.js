@@ -1,6 +1,8 @@
 function ForumHome() {
     return (
-        <h>Forum</h>
+        <div>
+            <h1>Forum</h1>
+        </div>
     )
 }
 
