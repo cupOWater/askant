@@ -20,6 +20,7 @@ const Footer = () =>{
                             
                         </ul>
                     </div>
+                    
 
                     <div class = "col">
                         <h4>FOLLOW US</h4>
