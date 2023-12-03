@@ -11,6 +11,8 @@ import Header from "./components/Header";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthrozied";
+import Footer from "./components/Footer";
+import SideBar from "./components/SideBar";
 
 function App() {
   const [user, setUser] = useState({}); // info about logged user from database; username is ID
@@ -31,6 +33,11 @@ function App() {
           <Route path='/admin' element={(userType==="User" && username==="Admin")?<Admin />:<Unauthorized />} />
         </Routes>
       </div>
+      <body>
+        <SideBar/>
+      </body>
+      
+      <Footer/>
     </Router>
   );
 }
