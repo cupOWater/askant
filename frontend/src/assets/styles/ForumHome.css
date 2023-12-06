@@ -1,0 +1,100 @@
+.forum-page {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+  
+.sidebar {
+    width: 25%;
+    height: 100%;
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.all-dis {
+    margin-bottom: 50px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.all-dis:hover {
+    background-color: #e0e0e0;
+}
+
+.category-sev {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column; /* 수직 방향으로 정렬 */
+    align-items: center;
+    justify-content: center;
+}
+
+.category-sev .sev-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sev-list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.sev-list li {
+    cursor: pointer;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: white;
+    flex: 1;
+}
+
+.sev-list li:hover {
+    background-color: #e0e0e0;
+}
+
+.post-button {
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.display-posts {
+    width: 70%;
+    border-right: 1px solid #ccc;
+    height: 100%;
+}
+
+.sidebar,
+.display-posts {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.post-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* 다른 스타일링 속성들도 추가할 수 있어요 */
+  }
+  
+  .profile-picture {
+    margin-right: 20px; /* 프로필 사진과 콘텐츠 사이의 간격 조정 */
+  }
+  
+  .post-content {
+    flex: 1; /* 콘텐츠가 남은 공간을 차지할 수 있도록 함 */
+  }
+  
+  .post-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 카테고리와 댓글을 오른쪽에 정렬 */
+  }
