@@ -1,107 +1,266 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import "../assets/styles/ForumHome.css";
+import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
+import testPic from "../../src/assets/images/testPic.jpg";
 
 function ForumHome() {
-    const dummyData = [
-        {
-          id: 1,
-          title: '첫 번째 포스트',
-          author: 'User1',
-          profilePicture: 'profile1.jpg',
-          category: 'Tech',
-          comments: 8,
-        },
-        {
-          id: 2,
-          title: '리액트의 마법',
-          author: 'User2',
-          profilePicture: 'profile2.jpg',
-          category: 'Programming',
-          comments: 12,
-        },
-        // ... 중간에 더미 데이터 추가
-        {
-          id: 15,
-          title: '마지막 포스트',
-          author: 'User3',
-          profilePicture: 'profile3.jpg',
-          category: 'Design',
-          comments: 5,
-        },
-      ];
+  const dummyData = [ // delete dummy data later
+      {
+        id: 1,
+        title: 'save ants',
+        author: 'tony1234',
+        profilePicture: testPic,
+        category: 'First',
+        comments: 8,
+      },
+      {
+        id: 2,
+        title: 'how to feed ants',
+        author: 'david4231',
+        profilePicture: testPic,
+        category: 'Second',
+        comments: 6,
+      },
+      {
+        id: 3,
+        title: 'any recommend tools for ant?',
+        author: 'khoi3344',
+        profilePicture: testPic,
+        category: 'First',
+        comments: 22,
+      },      {
+        id: 4,
+        title: 'some advices to beginner',
+        author: 'long6412',
+        profilePicture: testPic,
+        category: 'Second',
+        comments: 13,
+      },      {
+        id: 5,
+        title: 'COME AND SEE MY ANTS',
+        author: 'long6412',
+        profilePicture: testPic,
+        category: 'Third',
+        comments: 2,
+      },      {
+        id: 6,
+        title: 'I lost my ants...',
+        author: 'khoi3344',
+        profilePicture: testPic,
+        category: 'Third',
+        comments: 3,
+      },      {
+        id: 7,
+        title: ":)))",
+        author: 'tony1234',
+        profilePicture: testPic,
+        category: 'Fourth',
+        comments: 6,
+      },      {
+        id: 8,
+        title: 'recommend some music',
+        author: 'david4231',
+        profilePicture: testPic,
+        category: 'Third',
+        comments: 6,
+      },      {
+        id: 9,
+        title: 'my ants are dead.',
+        author: 'tony1234',
+        profilePicture: testPic,
+        category: 'Fourth',
+        comments: 44,
+      },      {
+        id: 10,
+        title: 'books for ants',
+        author: 'khoi3344',
+        profilePicture: testPic,
+        category: 'First',
+        comments: 0,
+      },
+      {
+        id: 11,
+        title: "DON'T DO THIS BEHAIVOR",
+        author: 'david4231',
+        profilePicture: testPic,
+        category: 'Third',
+        comments: 21,
+      },
+      {
+        id: 12,
+        title: "hi im newbieeee :D",
+        author: 'long6412',
+        profilePicture: testPic,
+        category: 'Fourth',
+        comments: 1,
+      },
+      {
+        id: 13,
+        title: 'rules to feed ants',
+        author: 'long6412',
+        profilePicture: testPic,
+        category: 'Fourth',
+        comments: 55,
+      },
+      {
+        id: 14,
+        title: 'hello',
+        author: 'tony1234',
+        profilePicture: testPic,
+        category: 'Second',
+        comments: 31,
+      },
+      {
+        id: 15,
+        title: 'any tv show recommendation?',
+        author: 'david4231',
+        profilePicture: testPic,
+        category: 'First',
+        comments: 11,
+      },
+    ];
 
-    const [posts, setPosts] = useState(dummyData); // 포스트 데이터를 담을 상태 -> 나중에 []로 고치기
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지를 담을 상태
+  const [posts, setPosts] = useState(dummyData); // change [](blank list) to later
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState("latest");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // API를 통해 포스트 데이터를 가져오는 함수 (예시)
   const fetchPosts = async () => {
-    // API 호출 및 데이터 가져오기
-    // 예를 들어, fetch나 axios 등의 라이브러리를 사용하여 데이터를 가져올 수 있습니다.
-    // 가져온 데이터는 setPosts로 상태를 업데이트합니다.
-    // 예시: const data = await fetch('API_ENDPOINT');
-    // setPosts(data);
+    // bring post data from db
+    // setPosts(real data);
   };
 
-  useEffect(() => {
-    fetchPosts(); // 컴포넌트가 마운트되면 포스트 데이터를 가져옵니다.
-  }, []); // 빈 배열을 넣어 최초 한 번만 호출되도록 합니다.
+  useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
+    fetchPosts();
+    const sortedPosts = sortPosts();
+    setPosts(sortedPosts);
+  }, [sortBy]);
 
-  // 페이지 변경 시 실행되는 함수
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    // 해당 페이지의 데이터를 가져오는 로직을 추가할 수 있습니다.
   };
 
-  // 현재 페이지에 해당하는 포스트 목록을 계산하는 로직
+  const handleSortChange = (option) => {
+    setSortBy(option);
+  };
+
+  const handleCategorySelect = (category) => {
+    if (category === 'All') {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+    }
+  };
+
+  const handleRefresh = () => {
+    fetchPosts();
+  };
+
+  const sortPosts = () => { // sorting method
+    if (sortBy === 'latest') {
+      return posts.slice().sort((a, b) => b.date - a.date);
+    } else if (sortBy === 'comments') {
+      return posts.slice().sort((a, b) => b.comments - a.comments);
+    }
+    return posts;
+  };
+
   const postsPerPage = 10;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const filteredPosts = selectedCategory
+    ? posts.filter((post) => post.category === selectedCategory)
+    : posts;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const renderPaginationButtons = () => {
+    const totalPageCount = Math.ceil(posts.length / postsPerPage);
+    const buttonsOnPage = 10;
+    const buttons = [];
+    let startPage, endPage;
+  
+    if (totalPageCount <= buttonsOnPage) {
+      startPage = 1;
+      endPage = totalPageCount;
+    } else {
+      if (currentPage <= Math.floor(buttonsOnPage / 2)) {
+        startPage = 1;
+        endPage = buttonsOnPage;
+      } else if (currentPage + Math.floor(buttonsOnPage / 2) >= totalPageCount) {
+        startPage = totalPageCount - buttonsOnPage + 1;
+        endPage = totalPageCount;
+      } else {
+        startPage = currentPage - Math.floor(buttonsOnPage / 2);
+        endPage = currentPage + Math.floor(buttonsOnPage / 2);
+      }
+    }
+  
+    for (let i = startPage; i <= endPage; i++) {
+      buttons.push(
+        <button
+          className={`page-num btn btn-warning btn-rounded ${i === currentPage ? 'active' : ''}`}
+          key={i}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return buttons;
+  };
 
     return (
         <div className="forum-page">
             <div className="sidebar">
-                <button className="btn btn-warning btn-rounded post-button">Post</button>
+              <button className="btn btn-warning btn-rounded post-button">Post</button>
                 <div className="category-sev">
-                    <p className="all-dis">All discussion</p>
+                    <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
                     <ul class="sev-list">
-                        <li>First</li>
-                        <li>Second</li>
-                        <li>Third</li>
-                        <li>Fourth</li>
+                        <li onClick={() => handleCategorySelect('First')}>First</li>
+                        <li onClick={() => handleCategorySelect('Second')}>Second</li>
+                        <li onClick={() => handleCategorySelect('Third')}>Third</li>
+                        <li onClick={() => handleCategorySelect('Fourth')}>Fourth</li>
                     </ul>
                 </div>
             </div>
-
+            <div className="right-side">
+              <div className="top-menu">
+                <div className="dropdown-menu">
+                  <select className="btn btn-secondary dropdown-toggle" value={sortBy} onChange={(e) => handleSortChange(e.target.value)}>
+                    <option value="latest">Latest</option>
+                    <option value="comments">Comments</option>
+                  </select>
+                </div>
+                <button className="refresh-button btn btn-primary" onClick={handleRefresh}>
+                  <img className="ArrowClockwise" src={ArrowClockwise} />
+                </button>
+              </div>
             <div className="display-posts">
                 {currentPosts.map((post) => (
-                    <div key={post.id} className="post-item">
+                    <div key={post.id} className="post-container">
                         <div className="profile-picture">
-                            {/* 유저 프로필 사진 */}
                             <img src={post.profilePicture} alt="Profile" />
                         </div>
                         <div className="post-content">
-                            {/* 글 제목 */}
-                            <h2>{post.title}</h2>
-                            {/* 작성자 정보 */}
-                            <p>Written by {post.author}</p>
+                          <div className="title-comments">
+                            <Link to={'/${post.id}'} state={{post}} className="post-title-link">
+                              <h3 className="post-title">{post.title}</h3>
+                            </Link>
+                            <p className='post-comments text-decoration-underline'>[{post.comments}]</p>
+                          </div>
+                            <p className="post-author">Written by <i>{post.author}</i></p>
                         </div>
                         <div className="post-details">
-                            {/* 카테고리와 댓글 수 */}
-                            <p>{post.category}</p>
-                            <p>{post.comments}</p>
+                            <p className='category-detail'>{post.category}</p>
                         </div>
                     </div>
                 ))}
-            
-                {/* Pagination */}
-                <div className="pagination">
-                    {Array.from({ length: Math.ceil(posts.length / postsPerPage) }, (_, index) => (
-                        <button key={index + 1} onClick={() => handlePageChange(index + 1)}>
-                            {index + 1}
-                        </button>
-                    ))}
+                <div className="pagination-container">
+                    {renderPaginationButtons()}
                 </div>
+            </div>
             </div>
         </div>
     )

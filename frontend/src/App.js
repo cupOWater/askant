@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthrozied";
+import PostDetail from "./components/PostDetail";
 import { useEffect, useState } from "react";
 import { userService } from "./service/userService";
 
@@ -33,6 +34,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<ForumHome />} />
+          <Route exact path="/:postId" element={<PostDetail />} />
 
           <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />
           <Route exact path="/register" element={<Register setUser={setUser} />} />
