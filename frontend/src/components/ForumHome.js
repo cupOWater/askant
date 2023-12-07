@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../assets/styles/ForumHome.css";
 import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
-import testPic from "../../src/assets/images/testPic.jpg";
 
 function ForumHome() {
   const dummyData = [ // delete dummy data later
@@ -240,9 +239,6 @@ function ForumHome() {
             <div className="display-posts">
                 {currentPosts.map((post) => (
                     <div key={post.id} className="post-container">
-                        <div className="profile-picture">
-                            <img src={post.profilePicture} alt="Profile" />
-                        </div>
                         <div className="post-content">
                           <div className="title-comments">
                             <Link to={'/${post.id}'} state={{post}} className="post-title-link">
