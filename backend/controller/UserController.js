@@ -22,6 +22,47 @@ class UserController {
             return res.status(500).send();
         }
     }
+
+    async getVerified(req, res) {
+        try {
+            const user = req.user;
+
+            if(!user) {
+                return res.status(401).send();
+            }
+
+            const userData = await User.findById(user.user_id);
+
+            userData.isVerified = true;
+            await userData.save();
+
+            return res.status(200).send("User is verified")
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send();
+        }
+    }
+
+    async changeUserName(req, res) {
+        try {
+            const user = req.user;
+            const newUserName = req.body.userName;
+
+            if(!user) {
+                return res.status(401).send();
+            }
+
+            const userData = await User.findById(user.user_id);
+            
+            userData.userName = newUserName
+            await userData.save();
+
+            return res.status(200).send("Username has been changed.")
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send();
+        }
+    }
 }
 
 module.exports = new UserController()
