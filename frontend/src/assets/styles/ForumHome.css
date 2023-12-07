@@ -28,7 +28,7 @@
     background-color: #e0e0e0;
 }
 
-.category-sev {
+.category-sel {
     margin-top: 40px;
     display: flex;
     flex-direction: column;
@@ -36,19 +36,19 @@
     justify-content: center;
 }
 
-.category-sev .sev-list {
+.category-sel .cate-list {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.sev-list {
+.cate-list {
     list-style: none;
     padding: 0;
     text-align: center;
 }
 
-.sev-list li {
+.cate-list li {
     cursor: pointer;
     padding: 8px 12px;
     margin: 10px 0;
@@ -57,7 +57,7 @@
     flex: 1;
 }
 
-.sev-list li:hover {
+.cate-list li:hover {
     background-color: #e0e0e0;
 }
 

@@ -167,37 +167,37 @@ function ForumHome() {
   };
 
   const postsPerPage = 10;
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const idxOfLastPost = currentPage * postsPerPage;
+  const idxOfFirstPost = idxOfLastPost - postsPerPage;
 
   const filteredPosts = selectedCategory
     ? posts.filter((post) => post.category === selectedCategory)
     : posts;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredPosts.slice(idxOfFirstPost, idxOfLastPost);
 
   const renderPaginationButtons = () => {
-    const totalPageCount = Math.ceil(posts.length / postsPerPage);
+    const totalPages = Math.ceil(posts.length / postsPerPage);
     const buttonsOnPage = 10;
     const buttons = [];
-    let startPage, endPage;
+    let startPageIdx, endPageIdx;
   
-    if (totalPageCount <= buttonsOnPage) {
-      startPage = 1;
-      endPage = totalPageCount;
+    if (totalPages <= buttonsOnPage) {
+      startPageIdx = 1;
+      endPageIdx = totalPages;
     } else {
       if (currentPage <= Math.floor(buttonsOnPage / 2)) {
-        startPage = 1;
-        endPage = buttonsOnPage;
-      } else if (currentPage + Math.floor(buttonsOnPage / 2) >= totalPageCount) {
-        startPage = totalPageCount - buttonsOnPage + 1;
-        endPage = totalPageCount;
+        startPageIdx = 1;
+        endPageIdx = buttonsOnPage;
+      } else if (currentPage + Math.floor(buttonsOnPage / 2) >= totalPages) {
+        startPageIdx = totalPages - buttonsOnPage + 1;
+        endPageIdx = totalPages;
       } else {
-        startPage = currentPage - Math.floor(buttonsOnPage / 2);
-        endPage = currentPage + Math.floor(buttonsOnPage / 2);
+        startPageIdx = currentPage - Math.floor(buttonsOnPage / 2);
+        endPageIdx = currentPage + Math.floor(buttonsOnPage / 2);
       }
     }
   
-    for (let i = startPage; i <= endPage; i++) {
+    for (let i = startPageIdx; i <= endPageIdx; i++) {
       buttons.push(
         <button
           className={`page-num btn btn-warning btn-rounded ${i === currentPage ? 'active' : ''}`}
@@ -215,9 +215,9 @@ function ForumHome() {
         <div className="forum-page">
             <div className="sidebar">
               <button className="btn btn-warning btn-rounded post-button">Post</button>
-                <div className="category-sev">
+                <div className="category-sel">
                     <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
-                    <ul class="sev-list">
+                    <ul class="cate-list">
                         <li onClick={() => handleCategorySelect('First')}>First</li>
                         <li onClick={() => handleCategorySelect('Second')}>Second</li>
                         <li onClick={() => handleCategorySelect('Third')}>Third</li>
