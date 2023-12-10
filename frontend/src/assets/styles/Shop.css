@@ -1,0 +1,119 @@
+.shop-page {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Side Bar */
+.sidebar-shop {
+    width: 10%;
+    height: 757px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-right: 1px solid #797777;
+   
+}
+
+.category {
+    /* height: 757px;
+    width: 15.625em;
+    border-right: 1px solid #797777;
+    text-align: center; */
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.category .category-list {
+    /* display: inline-block; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.category-list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.category-list li {
+    cursor: pointer;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: white;
+    flex: 1;
+}
+
+.category-item {
+    display: block;
+    font-size: 0.95em;
+    margin-top: -5px;
+    margin-bottom: -55px;
+}
+
+.category-item:hover {
+    opacity: 0.5;
+    transition: ease-in-out 0.2s;
+}
+
+.icon{
+    height:20px;
+    width:20px;
+    margin-right: 10px;
+}
+
+a.active{
+    color:#B00C0C
+}
+
+/* Product Display */
+.product-display{
+    width: 89%;
+    align-items: left;
+    
+}
+.product-display .card-holder{
+    width: fit-content;
+    display:inline-flex;
+    margin: auto;
+}
+
+.product-display .card-holder a{
+    text-decoration: none;
+    width: 12rem;
+    padding: 0px;
+    margin: 1rem 0.5rem 1rem 0.5rem;
+}
+
+.product-display a .card{
+    color: black;
+}
+
+.product-display .card .card-body .product-name{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product-display .card .image-holder{
+    display: flex;
+    height: 150px;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-display .card .image-holder .card-img-top{
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+}

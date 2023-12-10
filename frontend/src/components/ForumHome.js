@@ -1,6 +1,249 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import "../assets/styles/ForumHome.css";
+import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
+
 function ForumHome() {
+  const dummyData = [ // delete dummy data later
+      {
+        id: 1,
+        title: 'save ants',
+        author: 'tony1234',
+        category: 'First',
+        comments: 8,
+      },
+      {
+        id: 2,
+        title: 'how to feed ants',
+        author: 'david4231',
+        category: 'Second',
+        comments: 6,
+      },
+      {
+        id: 3,
+        title: 'any recommend tools for ant?',
+        author: 'khoi3344',
+        category: 'First',
+        comments: 22,
+      },      {
+        id: 4,
+        title: 'some advices to beginner',
+        author: 'long6412',
+        category: 'Second',
+        comments: 13,
+      },      {
+        id: 5,
+        title: 'COME AND SEE MY ANTS',
+        author: 'long6412',
+        category: 'Third',
+        comments: 2,
+      },      {
+        id: 6,
+        title: 'I lost my ants...',
+        author: 'khoi3344',
+        category: 'Third',
+        comments: 3,
+      },      {
+        id: 7,
+        title: ":)))",
+        author: 'tony1234',
+        category: 'Fourth',
+        comments: 6,
+      },      {
+        id: 8,
+        title: 'recommend some music',
+        author: 'david4231',
+        category: 'Third',
+        comments: 6,
+      },      {
+        id: 9,
+        title: 'my ants are dead.',
+        author: 'tony1234',
+        category: 'Fourth',
+        comments: 44,
+      },      {
+        id: 10,
+        title: 'books for ants',
+        author: 'khoi3344',
+        category: 'First',
+        comments: 0,
+      },
+      {
+        id: 11,
+        title: "DON'T DO THIS BEHAIVOR",
+        author: 'david4231',
+        category: 'Third',
+        comments: 21,
+      },
+      {
+        id: 12,
+        title: "hi im newbieeee :D",
+        author: 'long6412',
+        category: 'Fourth',
+        comments: 1,
+      },
+      {
+        id: 13,
+        title: 'rules to feed ants',
+        author: 'long6412',
+        category: 'Fourth',
+        comments: 55,
+      },
+      {
+        id: 14,
+        title: 'hello',
+        author: 'tony1234',
+        category: 'Second',
+        comments: 31,
+      },
+      {
+        id: 15,
+        title: 'any tv show recommendation?',
+        author: 'david4231',
+        category: 'First',
+        comments: 11,
+      },
+    ];
+
+  const [posts, setPosts] = useState(dummyData); // change [](blank list) to later
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState("latest");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const fetchPosts = async () => {
+    // bring post data from db
+    // setPosts(real data);
+  };
+
+  useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
+    fetchPosts();
+    const sortedPosts = sortPosts();
+    setPosts(sortedPosts);
+  }, [sortBy]);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleSortChange = (option) => {
+    setSortBy(option);
+  };
+
+  const handleCategorySelect = (category) => {
+    if (category === 'All') {
+      setSelectedCategory(null);
+    } else {
+      setSelectedCategory(category);
+    }
+  };
+
+  const handleRefresh = () => {
+    fetchPosts();
+  };
+
+  const sortPosts = () => { // sorting method
+    if (sortBy === 'latest') {
+      return posts.slice().sort((a, b) => b.date - a.date);
+    } else if (sortBy === 'comments') {
+      return posts.slice().sort((a, b) => b.comments - a.comments);
+    }
+    return posts;
+  };
+
+  const postsPerPage = 10;
+  const idxOfLastPost = currentPage * postsPerPage;
+  const idxOfFirstPost = idxOfLastPost - postsPerPage;
+
+  const filteredPosts = selectedCategory
+    ? posts.filter((post) => post.category === selectedCategory)
+    : posts;
+  const currentPosts = filteredPosts.slice(idxOfFirstPost, idxOfLastPost);
+
+  const renderPaginationButtons = () => {
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const buttonsOnPage = 10;
+    const buttons = [];
+    let startPageIdx, endPageIdx;
+  
+    if (totalPages <= buttonsOnPage) {
+      startPageIdx = 1;
+      endPageIdx = totalPages;
+    } else {
+      if (currentPage <= Math.floor(buttonsOnPage / 2)) {
+        startPageIdx = 1;
+        endPageIdx = buttonsOnPage;
+      } else if (currentPage + Math.floor(buttonsOnPage / 2) >= totalPages) {
+        startPageIdx = totalPages - buttonsOnPage + 1;
+        endPageIdx = totalPages;
+      } else {
+        startPageIdx = currentPage - Math.floor(buttonsOnPage / 2);
+        endPageIdx = currentPage + Math.floor(buttonsOnPage / 2);
+      }
+    }
+  
+    for (let i = startPageIdx; i <= endPageIdx; i++) {
+      buttons.push(
+        <button
+          className={`page-num btn btn-warning btn-rounded ${i === currentPage ? 'active' : ''}`}
+          key={i}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return buttons;
+  };
+
     return (
-        <h>Forum</h>
+        <div className="forum-page">
+            <div className="sidebar">
+              <button className="btn btn-warning btn-rounded post-button">Post</button>
+                <div className="category-sel">
+                    <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
+                    <ul class="cate-list">
+                        <li onClick={() => handleCategorySelect('First')}>First</li>
+                        <li onClick={() => handleCategorySelect('Second')}>Second</li>
+                        <li onClick={() => handleCategorySelect('Third')}>Third</li>
+                        <li onClick={() => handleCategorySelect('Fourth')}>Fourth</li>
+                    </ul>
+                </div>
+            </div>
+            <div className="right-side">
+              <div className="top-menu">
+                <div className="dropdown-menu">
+                  <select className="btn btn-secondary dropdown-toggle" value={sortBy} onChange={(e) => handleSortChange(e.target.value)}>
+                    <option value="latest">Latest</option>
+                    <option value="comments">Comments</option>
+                  </select>
+                </div>
+                <button className="refresh-button btn btn-primary" onClick={handleRefresh}>
+                  <img className="ArrowClockwise" src={ArrowClockwise} />
+                </button>
+              </div>
+            <div className="display-posts">
+                {currentPosts.map((post) => (
+                    <div key={post.id} className="post-container">
+                        <div className="post-content">
+                          <div className="title-comments">
+                            <Link to={'/${post.id}'} state={{post}} className="post-title-link">
+                              <h3 className="post-title">{post.title}</h3>
+                            </Link>
+                            <p className='post-comments text-decoration-underline'>[{post.comments}]</p>
+                          </div>
+                            <p className="post-author">Written by <i>{post.author}</i></p>
+                        </div>
+                        <div className="post-details">
+                            <p className='category-detail'>{post.category}</p>
+                        </div>
+                    </div>
+                ))}
+                <div className="pagination-container">
+                    {renderPaginationButtons()}
+                </div>
+            </div>
+            </div>
+        </div>
     )
 }
 

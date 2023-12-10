@@ -12,7 +12,7 @@ import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthrozied";
 import Footer from "./components/Footer";
-import SideBar from "./components/SideBar";
+import Shop from "./components/Shop";
 
 function App() {
   const [user, setUser] = useState({}); // info about logged user from database; username is ID
@@ -23,7 +23,10 @@ function App() {
       <Header userType={userType} username={user.username} />
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<ForumHome />} />
+          {/* <Route exact path="/" element={<ForumHome />} /> */}
+
+          <Route exact path="/" element={<Shop />} />
+
 
           <Route exact path="/logIn" element={<LogIn userType={userType} user={user} />} />
           <Route exact path="/register" element={<Register userType={userType} user={user} />} />
@@ -33,10 +36,6 @@ function App() {
           <Route path='/admin' element={(userType==="User" && username==="Admin")?<Admin />:<Unauthorized />} />
         </Routes>
       </div>
-      <body>
-        <SideBar/>
-      </body>
-      
       <Footer/>
     </Router>
   );
