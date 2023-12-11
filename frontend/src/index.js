@@ -5,7 +5,13 @@ import './index.css';
 import "./assets/styles/style.css";
 import App from './App';
 
+import Autobot from './Chatbot/autoBot';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <div>
+        <Autobot />
+        <App />
+    </div>
+
 );
