@@ -160,7 +160,7 @@ function ForumHome() {
   const currentPosts = filteredPosts.slice(idxOfFirstPost, idxOfLastPost);
 
   const renderPaginationButtons = () => {
-    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
     const buttonsOnPage = 10;
     const buttons = [];
     let startPageIdx, endPageIdx;
