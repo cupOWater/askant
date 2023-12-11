@@ -1,6 +1,9 @@
 .header {
     height:95px;
     border-bottom: 3px solid #D33636;
+    justify-content: space-between; /* 아이템 사이의 간격을 동일하게 설정 */
+    width: 100%;
+    flex-wrap: nowrap; /* 아이템이 한 줄에 유지되도록 설정합니다. */
 }
 
 .headerLeft {
@@ -19,15 +22,19 @@
 }
 
 .headerLeftItem {
-    padding-top: 33px;
-    padding-right: 50px;
+    padding: 27px 30px 0px 30px;
+    margin: 0 auto;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 18px;
 }
 
+.headerCenterItem {
+    margin: 0 auto;
+}
+
 .headerRightItem {
-    padding-top: 27px;
-    padding-right: 50px;
+    padding: 27px 30px 0px 30px;
+    margin: 0 auto;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 18px;
 }

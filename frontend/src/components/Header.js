@@ -18,11 +18,11 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
             <nav>
                 <ul>
                     <div className="headerLeft">
-                        <li className="headerLeftItem fst-normal"><a className="leftItems" href="#">Shopping</a></li>
                         <li className="headerLeftItem fst-normal"><a className="leftItems" href="/">Forum</a></li>
+                        <li className="headerLeftItem fst-normal"><a className="leftItems" href="#">Shopping</a></li>
                     </div>
                     <div className="headerCenter">
-                        <li><a href="/"><img src={logo} className="headerImage"></img></a></li>
+                        <li className="headerCenterItem"><a href="/"><img src={logo} className="headerImage"></img></a></li>
                     </div>
                     <div className="headerRight">
                         {(!user) ? // MUST change to 'userType' after backend work is done
