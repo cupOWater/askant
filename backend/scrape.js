@@ -27,18 +27,17 @@ const scrapeDomains = [
 
 // Store as {productName, productPrice, productImgSrc, Domain, Category}
 async function scrapeWebsite(domain) {
-    const browser = await puppeteer.launch({ headless: "false", defaultViewport: null });
+    const browser = await puppeteer.launch({ headless: "false"});
     const page = await browser.newPage();
     const result = []
 
     urls = domain.urls;
     for (let i = 0; i < urls.length; i++) {
-        await page.goto(urls[i].url);
+        page.goto(urls[i].url);
         let nextLink;
 
         do {
-            await page.waitForSelector(domain.mainQr);
- 
+            await page.waitForNavigation({waitUntil: "networkidle0"});
             let nextButtonNode = await page.$(domain.nextQr)
             if (nextButtonNode) {
                 nextLink = await nextButtonNode.evaluate(e => e.getAttribute("href"));
@@ -55,7 +54,7 @@ async function scrapeWebsite(domain) {
             }, domain.nameQr, domain.priceQr, domain.imgQr, domain.domainName, urls[i].cat));
  
             if (nextLink && nextLink !== "#") {
-                await page.click(domain.nextQr);
+                page.click(domain.nextQr);
             }
         }
         while (nextLink && nextLink !== "#")
