@@ -12,6 +12,7 @@ class ScrapeDomain {
     }
 }
 
+// Store domains with necessary parameters for scraping
 const scrapeDomains = [
     new ScrapeDomain("HT Exotic Zone", ".ant-single-product", ".product-title", ".price", "img", "a[title='»']",
         [
@@ -37,7 +38,7 @@ async function scrapeWebsite(domain) {
 
         do {
             await page.waitForSelector(domain.mainQr);
-    
+ 
             let nextButtonNode = await page.$(domain.nextQr)
             if (nextButtonNode) {
                 nextLink = await nextButtonNode.evaluate(e => e.getAttribute("href"));
