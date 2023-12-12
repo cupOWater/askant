@@ -1,5 +1,6 @@
 const e = require("express");
 const puppeteer = require("puppeteer");
+const ProductModel = require("../model/ProductModel");
 
 class ScrapeDomain {
     constructor(domainName, mainQr, nameQr, priceQr, imgQr, nextQr, linkQr, urls) {
@@ -96,14 +97,4 @@ async function scrapeWebsite(domains) {
     return result;
 }
 
-try {
-    scrapeWebsite(scrapeDomains).then(result => {
-        result.map(r => {
-            console.log(r);
-        })
-    })
-} catch (err) {
-    console.log(err);
-}
-
-
+module.exports = {scrapeDomains: scrapeDomains, scrapeWebsite: scrapeWebsite};
