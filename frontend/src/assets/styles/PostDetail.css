@@ -1,0 +1,17 @@
+.detail-page {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-top: 50px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.post-detail-title {
+    border-bottom: 2px solid black;
+
+}
+
+.post-detail-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
