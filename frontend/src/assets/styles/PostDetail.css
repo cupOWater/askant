@@ -57,6 +57,8 @@
 .comment-timestamp {
     text-align: left;
     margin: 0 0 10px 0;
+    font-size: 12px;
+    color: grey;
 }
 
 .comment-content {
