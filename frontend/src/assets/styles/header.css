@@ -1,23 +1,29 @@
 .header {
     height:95px;
     border-bottom: 3px solid #D33636;
-    justify-content: space-between; /* 아이템 사이의 간격을 동일하게 설정 */
+    justify-content: space-between;
     width: 100%;
-    flex-wrap: nowrap; /* 아이템이 한 줄에 유지되도록 설정합니다. */
+    flex-wrap: nowrap;
+}
+
+@media only screen and (max-width: 1200px) {
+    .header {
+        width: 1200px;
+    }
 }
 
 .headerLeft {
-    flex: 1;
+    width:490px;
     margin: 0 auto;
 }
 
 .headerCenter {
-    flex: 1;
+    width:490px;
     margin: 0 auto;
 }
 
 .headerRight {
-    flex: 1;
+    width:490px;
     margin: 0 auto;
 }
 

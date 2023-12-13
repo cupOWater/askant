@@ -94,9 +94,9 @@
 }
 
 .post-details {
-    margin-top:15px;
+    margin-top: 15px;
     display: flex;
-    flex-direction: space-between;
+    flex-direction: column;
     align-items: flex-end; 
 }
 
@@ -122,6 +122,12 @@
 
 .post-author {
     margin-bottom: 3px;
+}
+
+.category-detail,
+.timestamp-detail {
+  display: flex;
+  flex-direction: column;
 }
 
 .top-menu {

@@ -4,104 +4,156 @@ import "../assets/styles/ForumHome.css";
 import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
 
 function ForumHome() {
+  const comments = [
+    {
+      user_id: "david4231", 
+      content: "I agree with it", 
+      timestamp: "2023-11-20T03:55:39.106+00:00"}, 
+    {
+      user_id: "khoi4231", 
+      content: "nice opinion!", 
+      timestamp: "2023-11-20T03:58:11.106+00:00"
+    },     {
+      user_id: "asdf1234", 
+      content: "I agree with it", 
+      timestamp: "2023-11-20T03:55:39.106+00:00"},
+      {
+        user_id: "test3466", 
+        content: "I agree with it", 
+        timestamp: "2023-11-20T03:55:39.106+00:00"}, 
+        {
+          user_id: "ddfgdfg2143", 
+          content: "I agree with it", 
+          timestamp: "2023-11-20T03:55:39.106+00:00"}, ];
+
   const dummyData = [ // delete dummy data later
       {
         id: 1,
         title: 'save ants',
-        author: 'tony1234',
+        user_id: 'tony1234',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'First',
-        comments: 8,
+        comments: comments
       },
       {
         id: 2,
         title: 'how to feed ants',
-        author: 'david4231',
+        user_id: 'david4231',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Second',
-        comments: 6,
+        comments: comments,
       },
       {
         id: 3,
         title: 'any recommend tools for ant?',
-        author: 'khoi3344',
+        user_id: 'khoi3344',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'First',
-        comments: 22,
+        comments: comments,
       },      {
         id: 4,
         title: 'some advices to beginner',
-        author: 'long6412',
+        user_id: 'long6412',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Second',
-        comments: 13,
+        comments: comments,
       },      {
         id: 5,
         title: 'COME AND SEE MY ANTS',
-        author: 'long6412',
+        user_id: 'long6412',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Third',
-        comments: 2,
+        comments: comments,
       },      {
         id: 6,
         title: 'I lost my ants...',
-        author: 'khoi3344',
+        user_id: 'khoi3344',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Third',
-        comments: 3,
+        comments: comments,
       },      {
         id: 7,
         title: ":)))",
-        author: 'tony1234',
+        user_id: 'tony1234',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Fourth',
-        comments: 6,
+        comments: comments,
       },      {
         id: 8,
         title: 'recommend some music',
-        author: 'david4231',
+        user_id: 'david4231',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Third',
-        comments: 6,
+        comments: comments,
       },      {
         id: 9,
         title: 'my ants are dead.',
-        author: 'tony1234',
+        user_id: 'tony1234',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Fourth',
-        comments: 44,
+        comments: comments,
       },      {
         id: 10,
         title: 'books for ants',
-        author: 'khoi3344',
+        user_id: 'khoi3344',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'First',
-        comments: 0,
+        comments: comments,
       },
       {
         id: 11,
         title: "DON'T DO THIS BEHAIVOR",
-        author: 'david4231',
+        user_id: 'david4231',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Third',
-        comments: 21,
+        comments: comments,
       },
       {
         id: 12,
         title: "hi im newbieeee :D",
-        author: 'long6412',
+        user_id: 'long6412',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Fourth',
-        comments: 1,
+        comments: comments,
       },
       {
         id: 13,
         title: 'rules to feed ants',
-        author: 'long6412',
+        user_id: 'long6412',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Fourth',
-        comments: 55,
+        comments: comments,
       },
       {
         id: 14,
         title: 'hello',
-        author: 'tony1234',
+        user_id: 'tony1234',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Second',
-        comments: 31,
+        comments: comments,
       },
       {
         id: 15,
         title: 'any tv show recommendation?',
-        author: 'david4231',
+        user_id: 'david4231',
+        content: 'ants are unique!',
+        timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'First',
-        comments: 11,
+        comments: comments,
       },
     ];
 
@@ -145,7 +197,7 @@ function ForumHome() {
     if (sortBy === 'latest') {
       return posts.slice().sort((a, b) => b.date - a.date);
     } else if (sortBy === 'comments') {
-      return posts.slice().sort((a, b) => b.comments - a.comments);
+      return posts.slice().sort((a, b) => b.comments.length - a.comments.length);
     }
     return posts;
   };
@@ -201,7 +253,7 @@ function ForumHome() {
               <button className="btn btn-warning btn-rounded post-button">Post</button>
                 <div className="category-sel">
                     <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
-                    <ul class="cate-list">
+                    <ul className="cate-list">
                         <li onClick={() => handleCategorySelect('First')}>First</li>
                         <li onClick={() => handleCategorySelect('Second')}>Second</li>
                         <li onClick={() => handleCategorySelect('Third')}>Third</li>
@@ -229,12 +281,13 @@ function ForumHome() {
                             <Link to={'/${post.id}'} state={{post}} className="post-title-link">
                               <h3 className="post-title">{post.title}</h3>
                             </Link>
-                            <p className='post-comments text-decoration-underline'>[{post.comments}]</p>
+                            <p className='post-comments text-decoration-underline'>[{post.comments.length}]</p>
                           </div>
-                            <p className="post-author">Written by <i>{post.author}</i></p>
+                            <p className="post-author">Written by <i>{post.user_id}</i></p>
                         </div>
                         <div className="post-details">
                             <p className='category-detail'>{post.category}</p>
+                            <p className='timestamp-detail'>{new Date(post.timestamp).toLocaleString()}</p>
                         </div>
                     </div>
                 ))}
