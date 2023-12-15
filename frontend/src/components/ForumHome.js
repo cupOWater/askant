@@ -250,7 +250,7 @@ function ForumHome() {
     return (
         <div className="forum-page">
             <div className="sidebar">
-              <button className="btn btn-warning btn-rounded post-button">Post</button>
+            <Link to="/post"><button className="btn btn-warning btn-rounded post-button">Post</button></Link>
                 <div className="category-sel">
                     <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
                     <ul className="cate-list">

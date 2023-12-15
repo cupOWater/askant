@@ -11,6 +11,7 @@ import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthrozied";
 import PostDetail from "./components/PostDetail";
+import Post from "./components/Post";
 import { useEffect, useState } from "react";
 import { userService } from "./service/userService";
 
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<ForumHome />} />
           <Route exact path="/:postId" element={<PostDetail />} />
+          <Route exact path="/post" element={<Post />} />
 
           <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />
           <Route exact path="/register" element={<Register setUser={setUser} />} />
