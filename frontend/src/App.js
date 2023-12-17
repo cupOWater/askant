@@ -12,7 +12,9 @@ import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthrozied";
 import Footer from "./components/Footer";
-import Shop from "./components/Shop";
+// import Shop from "./components/Shop";
+import Category from "./components/Category";
+
 
 function App() {
   const [user, setUser] = useState({}); // info about logged user from database; username is ID
@@ -25,7 +27,8 @@ function App() {
         <Routes>
           {/* <Route exact path="/" element={<ForumHome />} /> */}
 
-          <Route exact path="/" element={<Shop />} />
+          {/* <Route exact path="/" element={<Shop />} /> */}
+          <Route exact path="/" element={<Category />} />
 
 
           <Route exact path="/logIn" element={<LogIn userType={userType} user={user} />} />
@@ -36,7 +39,7 @@ function App() {
           <Route path='/admin' element={(userType==="User" && username==="Admin")?<Admin />:<Unauthorized />} />
         </Routes>
       </div>
-      <Footer/>
+     
     </Router>
   );
 }

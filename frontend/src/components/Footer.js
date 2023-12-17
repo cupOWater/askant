@@ -8,31 +8,28 @@ import "../assets/styles/footer.css";
 
 const Footer = () =>{
     return (
-        <footer class = "footer">
-            <div class = "container">
-                <div class = "row">
-
-                    <div class = "col">
-                        <h4>CONTACT</h4>
-                        <ul class="footer-list">
-                            <li class="footer-left-item"><img src ={phone} class ="icon-left" alt="phone"/>+84 901234567</li>
-                            <li class="footer-left-item"><img src ={mail} class ="icon-left"/> askant@gmail.com</li>
-                            
-                        </ul>
-                    </div>
+        <footer className="footer bg-light mt-5">
+            <div className="container">
+                <div className="row">
                     
-                    <div class = "col">
-                        <h4>FOLLOW US</h4>
-                        <ul>
-                            <li class="footer-right-item"><img src={facebook} class="icon-right" alt="facebook"/></li>
-                            <li class="footer-right-item"><img src={instagram} class="icon-right" alt="instagram"/></li>
-                            <li class="footer-right-item"><img src={github} class="icon-right" alt="github"/></li>
-                            <li class="footer-right-item"><img src={youtube} class="icon-right" alt="youtube"/></li>
-                        </ul>
+                    <div className="col-md-6">
+                    <h5>Contact</h5>
+                    <p><img src ={phone} class ="icon-left" alt="phone"/>+84 901234567 </p>
+                    <p><img src ={mail} class ="icon-left"/> askant@gmail.com</p>
+                    </div>
+                
+                
+                    <div className="col-md-6">
+                        <h5>Follow Us</h5>
+                            <ul>
+                                <li class="footer-right-item"><img src={facebook} class="icon-right" alt="facebook"/></li>
+                                <li class="footer-right-item"><img src={instagram} class="icon-right" alt="instagram"/></li>
+                                <li class="footer-right-item"><img src={github} class="icon-right" alt="github"/></li>
+                                <li class="footer-right-item"><img src={youtube} class="icon-right" alt="youtube"/></li>
+                            </ul>
                     </div>
                 </div>
             </div>
-            
         </footer>
     )
 }
