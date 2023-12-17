@@ -79,7 +79,7 @@
     box-sizing: border-box;
 }
 
-.post-container {
+.posts-container {
     width: 100%;
     border-top: 1px solid #ccc;
     display: flex;
@@ -126,8 +126,8 @@
 
 .category-detail,
 .timestamp-detail {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .top-menu {

@@ -275,7 +275,7 @@ function ForumHome() {
               </div>
             <div className="display-posts">
                 {currentPosts.map((post) => (
-                    <div key={post.id} className="post-container">
+                    <div key={post.id} className="posts-container">
                         <div className="post-content">
                           <div className="title-comments">
                             <Link to={'/${post.id}'} state={{post}} className="post-title-link">
