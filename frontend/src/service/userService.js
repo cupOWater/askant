@@ -10,6 +10,7 @@ class UserService {
             return error;
         }
     }
+
 }
 
 export const userService = new UserService();
