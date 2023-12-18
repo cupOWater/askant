@@ -6,7 +6,7 @@
 }
 
 .sidebar {
-    width: 18%;
+    width: 257px;
     height: 900px;
     padding: 20px;
     display: flex;
@@ -21,6 +21,7 @@
     padding: 8px 12px;
     border-radius: 5px;
     background-color: white;
+    text-align: center;
 }
 
 .all-dis:hover {
@@ -67,7 +68,7 @@
 }
 
 .right-side {
-    width: 82%;
+    width: 1168px;
 }
 
 .display-posts {
@@ -80,7 +81,7 @@
 }
 
 .posts-container {
-    width: 100%;
+    width: 1128px;
     border-top: 1px solid #ccc;
     display: flex;
     align-items: center;
