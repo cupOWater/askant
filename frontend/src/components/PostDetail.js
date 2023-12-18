@@ -7,13 +7,35 @@ function PostDetail() {
   const location = useLocation();
   const { post } = location.state; 
 
+  const [comments, setComments] = useState(post.comments);
+  const [newComment, setNewComment] = useState('');
+
+  const handleComment = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  const handleAddComment = () => {
+    if (newComment.trim() !== '') {
+      const newCommentVal = {
+        user_id: 'tony1234', // dummy data; must change to current user id
+        content: newComment,
+        timestamp: new Date().toISOString(),
+      };
+
+      setComments([...comments, newCommentVal]);
+      setNewComment('');
+
+      //window.location.reload(); // refresh(required?)
+    }
+  };
+
   return (
     <div className="detail-page">
       <div className="post-detail-title">
         <h2>[{post.category}]  {post.title}</h2>
         <div className="post-detail-author">
           <p className="author"><i>{post.user_id}</i></p>
-          <p className="num-comments">{post.comments.length} comments</p>
+          <p className="num-comments">{comments.length} comments</p>
         </div>
       </div>
       <div className="post-detail-content">
@@ -25,9 +47,18 @@ function PostDetail() {
         </div>
       </div>
       <div className="comments-section">
-        <h3 className='comments-number'>Comments {post.comments.length}</h3>
+        <h3 className='comments-number'>Comments {comments.length}</h3>
+        <div className='comment-container'>
+          <input className='comment-input'
+            type='text'
+            value={newComment}
+            onChange={handleComment}
+            placeholder='Write your comment...'
+          />
+          <button className="btn btn-warning btn-rounded comment-submit" onClick={handleAddComment}>Submit</button>
+        </div>
         <ul className="display-comment">
-          {post.comments.map((comment, index) => (
+          {comments.map((comment, index) => (
             <li key={index}>
               <p className='comment-userid'>{comment.user_id}</p>
               <p className='comment-timestamp'>{new Date(comment.timestamp).toLocaleString()}</p>

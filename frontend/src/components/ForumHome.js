@@ -4,7 +4,7 @@ import "../assets/styles/ForumHome.css";
 import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
 
 function ForumHome() {
-  const comments = [
+  const comments = [  // delete dummy data later
     {
       user_id: "david4231", 
       content: "I agree with it", 
@@ -24,7 +24,8 @@ function ForumHome() {
         {
           user_id: "ddfgdfg2143", 
           content: "I agree with it", 
-          timestamp: "2023-11-20T03:55:39.106+00:00"}, ];
+          timestamp: "2023-11-20T03:55:39.106+00:00"}, 
+  ];
 
   const dummyData = [ // delete dummy data later
       {
