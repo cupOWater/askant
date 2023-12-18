@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import logo from "../assets/images/logo.png"
 import PersonCircle from "../assets/images/person-circle.svg"
-import "../assets/styles/Header.css";
+import "../assets/styles/header.css";
 import { authService } from "../service/authService";
 
 function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
