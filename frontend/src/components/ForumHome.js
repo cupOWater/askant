@@ -34,7 +34,7 @@ function ForumHome() {
         user_id: 'tony1234',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'First',
+        category: 'Discussion',
         comments: comments
       },
       {
@@ -43,7 +43,7 @@ function ForumHome() {
         user_id: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Second',
+        category: 'Discussion',
         comments: comments,
       },
       {
@@ -52,7 +52,7 @@ function ForumHome() {
         user_id: 'khoi3344',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'First',
+        category: 'Q&A',
         comments: comments,
       },      {
         id: 4,
@@ -60,7 +60,7 @@ function ForumHome() {
         user_id: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Second',
+        category: 'Free',
         comments: comments,
       },      {
         id: 5,
@@ -68,7 +68,7 @@ function ForumHome() {
         user_id: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Third',
+        category: 'Free',
         comments: comments,
       },      {
         id: 6,
@@ -76,7 +76,7 @@ function ForumHome() {
         user_id: 'khoi3344',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Third',
+        category: 'Free',
         comments: comments,
       },      {
         id: 7,
@@ -84,7 +84,7 @@ function ForumHome() {
         user_id: 'tony1234',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Fourth',
+        category: 'Trade',
         comments: comments,
       },      {
         id: 8,
@@ -92,7 +92,7 @@ function ForumHome() {
         user_id: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Third',
+        category: 'Trade',
         comments: comments,
       },      {
         id: 9,
@@ -100,7 +100,7 @@ function ForumHome() {
         user_id: 'tony1234',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Fourth',
+        category: 'Trade',
         comments: comments,
       },      {
         id: 10,
@@ -108,7 +108,7 @@ function ForumHome() {
         user_id: 'khoi3344',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'First',
+        category: 'Q&A',
         comments: comments,
       },
       {
@@ -117,7 +117,7 @@ function ForumHome() {
         user_id: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Third',
+        category: 'Discussion',
         comments: comments,
       },
       {
@@ -126,7 +126,7 @@ function ForumHome() {
         user_id: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Fourth',
+        category: 'Q&A',
         comments: comments,
       },
       {
@@ -135,7 +135,7 @@ function ForumHome() {
         user_id: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Fourth',
+        category: 'Free',
         comments: comments,
       },
       {
@@ -144,7 +144,7 @@ function ForumHome() {
         user_id: 'tony1234',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Second',
+        category: 'Discussion',
         comments: comments,
       },
       {
@@ -153,7 +153,7 @@ function ForumHome() {
         user_id: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'First',
+        category: 'Free',
         comments: comments,
       },
     ];
@@ -255,10 +255,10 @@ function ForumHome() {
                 <div className="category-sel">
                     <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
                     <ul className="cate-list">
-                        <li onClick={() => handleCategorySelect('First')}>First</li>
-                        <li onClick={() => handleCategorySelect('Second')}>Second</li>
-                        <li onClick={() => handleCategorySelect('Third')}>Third</li>
-                        <li onClick={() => handleCategorySelect('Fourth')}>Fourth</li>
+                        <li onClick={() => handleCategorySelect('Discussion')}>Discussion</li>
+                        <li onClick={() => handleCategorySelect('Q&A')}>Q&A</li>
+                        <li onClick={() => handleCategorySelect('Free')}>Free</li>
+                        <li onClick={() => handleCategorySelect('Trade')}>Trade</li>
                     </ul>
                 </div>
             </div>
