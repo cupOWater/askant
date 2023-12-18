@@ -10,7 +10,7 @@ import Autobot from './Chatbot/autoBot';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <div>
-        <Autobot />
+        {/* <Autobot /> */}
         <App />
     </div>
 
