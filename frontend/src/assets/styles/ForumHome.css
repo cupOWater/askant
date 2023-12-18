@@ -135,6 +135,10 @@
     margin-bottom: 3px;
 }
 
+.admin-style {
+    color:red;
+}
+
 .category-detail,
 .timestamp-detail {
     display: flex;

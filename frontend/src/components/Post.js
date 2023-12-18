@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from "react-quill";
 import "../assets/styles/Post.css";
 import 'react-quill/dist/quill.snow.css';
+import Unauthorized from './Unauthorized';
 
-function Post() {
+function Post({ user }) {
     // all required variables for Post object
     const [title, setTitle] = useState("");
     const [userID, setUserID] = useState(""); // retrieve from logged in user
@@ -66,33 +67,39 @@ function Post() {
         // api for backend; to save post on mongodb
     };
 
-    return (
-        <>
-            <div className='post-container'>
-                <div style={{margin: "0 auto"}}>
-                    <div className='title-container'>
-                        <label className="title" style={{ marginRight: "10px" }}>Title</label>
-                        <input id="title" type="text" onChange={handleTitleChange} style={{ marginRight: "30px", width: "350px" }}/>
-                        <label className="category" style={{ marginRight: "10px" }}>Category</label>
-                        <select className="btn btn-secondary dropdown-toggle" value={category} onChange={(e) => handleCategoryChange(e.target.value)}>
-                            <option value="first">First</option>
-                            <option value="second">Second</option>
-                            <option value="third">Third</option>
-                            <option value="fourth">Fourth</option>
-                    </select>
+    if(user === undefined) { // not logged in
+        return <Unauthorized />
+    } else {
+        const isAdmin = user.type === 'admin';
+
+        return (
+            <>
+                <div className='post-container'>
+                    <div style={{margin: "0 auto"}}>
+                        <div className='title-container'>
+                            <label className="title" style={{ marginRight: "10px" }}>Title</label>
+                            <input id="title" type="text" onChange={handleTitleChange} style={{ marginRight: "30px", width: "350px" }}/>
+                            <label className="category" style={{ marginRight: "10px" }}>Category</label>
+                            <select className="btn btn-secondary dropdown-toggle" value={category} onChange={(e) => handleCategoryChange(e.target.value)}>
+                                {isAdmin && <option value="Announcement">Announcement</option>}
+                                <option value="Q&A">Q&A</option>
+                                <option value="Free">Free</option>
+                                <option value="Trade">Trade</option>
+                        </select>
+                        </div>
+                    <ReactQuill
+                        theme='snow'
+                        style={{ width: "800px", height: "600px" }}
+                        modules={modules}
+                        onChange={setContent}
+                    />
                     </div>
-                <ReactQuill
-                    theme='snow'
-                    style={{ width: "800px", height: "600px" }}
-                    modules={modules}
-                    onChange={setContent}
-                />
+                    <button className="btn btn-warning btn-rounded post-button" onClick={handleSubmit}>Post</button>
                 </div>
-                <button className="btn btn-warning btn-rounded post-button" onClick={handleSubmit}>Post</button>
-            </div>
-            
-        </>
-    );
+                
+            </>
+        );
+    }
 }
 
 export default Post;

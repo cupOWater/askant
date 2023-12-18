@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import forbidden from "../assets/images/forbidden.jpg"
 import "../assets/styles/PostDetail.css";
 
-function PostDetail() {
+function PostDetail({ user }) {
   const location = useLocation();
   const { post } = location.state; 
 
@@ -17,7 +17,7 @@ function PostDetail() {
   const handleAddComment = () => {
     if (newComment.trim() !== '') {
       const newCommentVal = {
-        user_id: 'tony1234', // dummy data; must change to current user id
+        user_id: 'admin', // dummy data; must change to current user id
         content: newComment,
         timestamp: new Date().toISOString(),
       };
@@ -60,7 +60,9 @@ function PostDetail() {
         <ul className="display-comment">
           {comments.map((comment, index) => (
             <li key={index}>
-              <p className='comment-userid'>{comment.user_id}</p>
+                    <p className={`comment-userid ${comment.user_id === 'admin' ? 'admin-style' : ''}`}>
+                      {comment.user_id}
+                    </p>
               <p className='comment-timestamp'>{new Date(comment.timestamp).toLocaleString()}</p>
               <p className='comment-content'>{comment.content}</p>
             </li>

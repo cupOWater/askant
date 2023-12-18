@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "../assets/styles/ForumHome.css";
 import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
 
-function ForumHome() {
+function ForumHome({ user }) {
   const comments = [  // delete dummy data later
     {
       user_id: "david4231", 
@@ -31,10 +31,10 @@ function ForumHome() {
       {
         id: 1,
         title: 'save ants',
-        user_id: 'tony1234',
+        user_id: 'admin',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Discussion',
+        category: 'Announcement',
         comments: comments
       },
       {
@@ -81,10 +81,10 @@ function ForumHome() {
       },      {
         id: 7,
         title: ":)))",
-        user_id: 'tony1234',
+        user_id: 'admin',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Trade',
+        category: 'Announcement',
         comments: comments,
       },      {
         id: 8,
@@ -255,7 +255,7 @@ function ForumHome() {
                 <div className="category-sel">
                     <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
                     <ul className="cate-list">
-                        <li onClick={() => handleCategorySelect('Discussion')}>Discussion</li>
+                        <li onClick={() => handleCategorySelect('Announcement')}>Announcement</li>
                         <li onClick={() => handleCategorySelect('Q&A')}>Q&A</li>
                         <li onClick={() => handleCategorySelect('Free')}>Free</li>
                         <li onClick={() => handleCategorySelect('Trade')}>Trade</li>
@@ -284,7 +284,12 @@ function ForumHome() {
                             </Link>
                             <p className='post-comments text-decoration-underline'>[{post.comments.length}]</p>
                           </div>
-                            <p className="post-author">Written by <i>{post.user_id}</i></p>
+                          <p className="post-author">
+                            Written by {' '}
+                            <i className={post.user_id === 'admin' ? 'admin-style' : ''}>
+                              {post.user_id}
+                            </i>
+                          </p>
                         </div>
                         <div className="post-details">
                             <p className='category-detail'>{post.category}</p>

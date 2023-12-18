@@ -11,3 +11,5 @@ router.use(auth);
 
 router.use(adminAuth);
 // router.delete(":id")
+
+module.exports = router

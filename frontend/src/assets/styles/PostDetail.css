@@ -73,7 +73,11 @@
     text-align: left;
     margin: 0 0 5px 0;
 }
-  
+
+.admin-style {
+    color:red;
+}
+
 .comment-timestamp {
     text-align: left;
     margin: 0 0 10px 0;
