@@ -15,7 +15,7 @@ import { userService } from "./service/userService";
 
 function App() {
   const [user, setUser] = useState();
-
+  
   useEffect(() => {
     if (localStorage.getItem("aToken")) {
       userService.getCurrent()
@@ -26,7 +26,7 @@ function App() {
         })
     }
   }, [])
-
+  
   return (
     <Router>
       <Header user={user} setUser={setUser} />
