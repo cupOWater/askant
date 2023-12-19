@@ -12,19 +12,19 @@ function ForumHome({ user }) {
     {
       user_id: "khoi4231", 
       content: "nice opinion!", 
-      timestamp: "2023-11-20T03:58:11.106+00:00"
+      timestamp: "2023-11-20T04:50:13.106+00:00"
     },     {
       user_id: "asdf1234", 
       content: "I agree with it", 
-      timestamp: "2023-11-20T03:55:39.106+00:00"},
+      timestamp: "2023-11-20T07:20:12.106+00:00"},
       {
         user_id: "test3466", 
         content: "I agree with it", 
-        timestamp: "2023-11-20T03:55:39.106+00:00"}, 
+        timestamp: "2023-11-20T04:33:39.106+00:00"}, 
         {
-          user_id: "ddfgdfg2143", 
+          user_id: "admin", 
           content: "I agree with it", 
-          timestamp: "2023-11-20T03:55:39.106+00:00"}, 
+          timestamp: "2023-11-20T05:11:11.106+00:00"}, 
   ];
 
   const dummyData = [ // delete dummy data later
@@ -91,7 +91,7 @@ function ForumHome({ user }) {
         title: 'recommend some music',
         user_id: 'david4231',
         content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
+        timestamp: '2023-11-20T03:52:38.106+00:00',
         category: 'Trade',
         comments: comments,
       },      {
@@ -99,7 +99,7 @@ function ForumHome({ user }) {
         title: 'my ants are dead.',
         user_id: 'tony1234',
         content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
+        timestamp: '2023-11-20T01:51:38.106+00:00',
         category: 'Trade',
         comments: comments,
       },      {
@@ -196,7 +196,7 @@ function ForumHome({ user }) {
 
   const sortPosts = () => { // sorting method
     if (sortBy === 'latest') {
-      return posts.slice().sort((a, b) => b.date - a.date);
+      return posts.slice().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     } else if (sortBy === 'comments') {
       return posts.slice().sort((a, b) => b.comments.length - a.comments.length);
     }

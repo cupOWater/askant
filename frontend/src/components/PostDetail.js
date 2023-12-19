@@ -3,12 +3,19 @@ import { useLocation } from 'react-router-dom';
 import forbidden from "../assets/images/forbidden.jpg"
 import "../assets/styles/PostDetail.css";
 
-function PostDetail({ user }) {
+function PostDetail() {
   const location = useLocation();
   const { post } = location.state; 
 
   const [comments, setComments] = useState(post.comments);
   const [newComment, setNewComment] = useState('');
+
+  useEffect(() => {
+    const commentsSorted = [...comments].sort((a, b) => {
+      return new Date(a.timestamp) - new Date(b.timestamp);
+    })
+    setComments(commentsSorted);
+  }, [comments])
 
   const handleComment = (e) => {
     setNewComment(e.target.value);

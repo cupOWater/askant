@@ -32,7 +32,7 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
                             </>
                             :
                             <>
-                                <li className="headerRightItem fst-normal"><a href="#"><button type="button" className="btn btn-outline-primary fst-normal"><img className="personCircle" src={PersonCircle} />{user.userName}</button></a></li>
+                                <li className="headerRightItem fst-normal"><a href=""><button type="button" className="btn btn-outline-primary fst-normal"><img className="personCircle" src={PersonCircle} />{user.userName}</button></a></li>
                                 <li className="headerRightItem"><button type="button" className="btn btn-danger fst-normal" onClick={logout}>Log Out</button></li>
                             </>
                         }
