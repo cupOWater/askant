@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import forbidden from "../assets/images/forbidden.jpg"
 import "../assets/styles/PostDetail.css";
 
-function PostDetail() {
+function PostDetail({ user }) {
   const location = useLocation();
   const { post } = location.state; 
 
@@ -22,17 +22,25 @@ function PostDetail() {
   };
 
   const handleAddComment = () => {
-    if (newComment.trim() !== '') {
-      const newCommentVal = {
-        user_id: 'admin', // dummy data; must change to current user id
-        content: newComment,
-        timestamp: new Date().toISOString(),
-      };
+    if(user === undefined) {
+      alert('Log in required.');
+      return;
+    } else {
+      if (newComment.trim() !== '') {
+        const newCommentVal = {
+          userName: user.userName,
+          content: newComment,
+          timestamp: new Date().toISOString(),
+        };
 
-      setComments([...comments, newCommentVal]);
-      setNewComment('');
+        setComments([...comments, newCommentVal]);
+        setNewComment('');
 
-      //window.location.reload(); // refresh(required?)
+        //window.location.reload(); // refresh(required?)
+      } else {
+        alert('Write any comments.');
+        return;
+      }
     }
   };
 
@@ -41,7 +49,7 @@ function PostDetail() {
       <div className="post-detail-title">
         <h2>[{post.category}]  {post.title}</h2>
         <div className="post-detail-author">
-          <p className="author"><i>{post.user_id}</i></p>
+          <p className="author"><i>{post.userName}</i></p>
           <p className="num-comments">{comments.length} comments</p>
         </div>
       </div>
@@ -67,8 +75,8 @@ function PostDetail() {
         <ul className="display-comment">
           {comments.map((comment, index) => (
             <li key={index}>
-                    <p className={`comment-userid ${comment.user_id === 'admin' ? 'admin-style' : ''}`}>
-                      {comment.user_id}
+                    <p className={`comment-userid ${comment.userName === 'admin' ? 'admin-style' : ''}`}>
+                      {comment.userName}
                     </p>
               <p className='comment-timestamp'>{new Date(comment.timestamp).toLocaleString()}</p>
               <p className='comment-content'>{comment.content}</p>

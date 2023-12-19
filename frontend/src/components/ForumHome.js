@@ -6,23 +6,23 @@ import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
 function ForumHome({ user }) {
   const comments = [  // delete dummy data later
     {
-      user_id: "david4231", 
+      userName: "david4231", 
       content: "I agree with it", 
       timestamp: "2023-11-20T03:55:39.106+00:00"}, 
     {
-      user_id: "khoi4231", 
+      userName: "khoi4231", 
       content: "nice opinion!", 
       timestamp: "2023-11-20T04:50:13.106+00:00"
     },     {
-      user_id: "asdf1234", 
+      userName: "asdf1234", 
       content: "I agree with it", 
       timestamp: "2023-11-20T07:20:12.106+00:00"},
       {
-        user_id: "test3466", 
+        userName: "test3466", 
         content: "I agree with it", 
         timestamp: "2023-11-20T04:33:39.106+00:00"}, 
         {
-          user_id: "admin", 
+          userName: "admin", 
           content: "I agree with it", 
           timestamp: "2023-11-20T05:11:11.106+00:00"}, 
   ];
@@ -31,7 +31,7 @@ function ForumHome({ user }) {
       {
         id: 1,
         title: 'save ants',
-        user_id: 'admin',
+        userName: 'admin',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Announcement',
@@ -40,7 +40,7 @@ function ForumHome({ user }) {
       {
         id: 2,
         title: 'how to feed ants',
-        user_id: 'david4231',
+        userName: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Discussion',
@@ -49,7 +49,7 @@ function ForumHome({ user }) {
       {
         id: 3,
         title: 'any recommend tools for ant?',
-        user_id: 'khoi3344',
+        userName: 'khoi3344',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Q&A',
@@ -57,7 +57,7 @@ function ForumHome({ user }) {
       },      {
         id: 4,
         title: 'some advices to beginner',
-        user_id: 'long6412',
+        userName: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Free',
@@ -65,7 +65,7 @@ function ForumHome({ user }) {
       },      {
         id: 5,
         title: 'COME AND SEE MY ANTS',
-        user_id: 'long6412',
+        userName: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Free',
@@ -73,7 +73,7 @@ function ForumHome({ user }) {
       },      {
         id: 6,
         title: 'I lost my ants...',
-        user_id: 'khoi3344',
+        userName: 'khoi3344',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Free',
@@ -81,7 +81,7 @@ function ForumHome({ user }) {
       },      {
         id: 7,
         title: ":)))",
-        user_id: 'admin',
+        userName: 'admin',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Announcement',
@@ -89,7 +89,7 @@ function ForumHome({ user }) {
       },      {
         id: 8,
         title: 'recommend some music',
-        user_id: 'david4231',
+        userName: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:52:38.106+00:00',
         category: 'Trade',
@@ -97,7 +97,7 @@ function ForumHome({ user }) {
       },      {
         id: 9,
         title: 'my ants are dead.',
-        user_id: 'tony1234',
+        userName: 'tony1234',
         content: 'ants are unique!',
         timestamp: '2023-11-20T01:51:38.106+00:00',
         category: 'Trade',
@@ -105,7 +105,7 @@ function ForumHome({ user }) {
       },      {
         id: 10,
         title: 'books for ants',
-        user_id: 'khoi3344',
+        userName: 'khoi3344',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Q&A',
@@ -114,7 +114,7 @@ function ForumHome({ user }) {
       {
         id: 11,
         title: "DON'T DO THIS BEHAIVOR",
-        user_id: 'david4231',
+        userName: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Discussion',
@@ -123,7 +123,7 @@ function ForumHome({ user }) {
       {
         id: 12,
         title: "hi im newbieeee :D",
-        user_id: 'long6412',
+        userName: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Q&A',
@@ -132,7 +132,7 @@ function ForumHome({ user }) {
       {
         id: 13,
         title: 'rules to feed ants',
-        user_id: 'long6412',
+        userName: 'long6412',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Free',
@@ -141,7 +141,7 @@ function ForumHome({ user }) {
       {
         id: 14,
         title: 'hello',
-        user_id: 'tony1234',
+        userName: 'tony1234',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Discussion',
@@ -150,7 +150,7 @@ function ForumHome({ user }) {
       {
         id: 15,
         title: 'any tv show recommendation?',
-        user_id: 'david4231',
+        userName: 'david4231',
         content: 'ants are unique!',
         timestamp: '2023-11-20T03:54:38.106+00:00',
         category: 'Free',
@@ -286,8 +286,8 @@ function ForumHome({ user }) {
                           </div>
                           <p className="post-author">
                             Written by {' '}
-                            <i className={post.user_id === 'admin' ? 'admin-style' : ''}>
-                              {post.user_id}
+                            <i className={post.userName === 'admin' ? 'admin-style' : ''}>
+                              {post.userName}
                             </i>
                           </p>
                         </div>
