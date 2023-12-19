@@ -25,7 +25,7 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
                         <li className="headerCenterItem"><a href="/"><img src={logo} className="headerImage"></img></a></li>
                     </div>
                     <div className="headerRight">
-                        {(!user) ? // MUST change to 'userType' after backend work is done
+                        {(!user) ?
                             <>
                                 <li className="headerRightItem fst-normal"><a href="/register"><button type="button" className="btn btn-outline-success fst-normal">Sign up</button></a></li>
                                 <li className="headerRightItem fst-normal"><a href="/LogIn"><button type="button" className="btn btn-outline-warning fst-normal">Log In</button></a></li>
