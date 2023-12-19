@@ -12,6 +12,7 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
         authService.logout();
         setUser();
         navigate("/");
+        window.location.reload();
     }
     return (
         <header className="header">

@@ -58,7 +58,8 @@
     text-align: center;
 }
 
-.cate-list li {
+.cate-list li,
+.veri {
     cursor: pointer;
     padding: 8px 12px;
     margin: 10px 0;
@@ -67,8 +68,17 @@
     flex: 1;
 }
 
-.cate-list li:hover {
+.cate-list li:hover,
+.veri:hover {
     background-color: #e0e0e0;
+}
+
+.veri {
+    margin-top: 170px;
+}
+
+.Check {
+    margin-right: 5px;
 }
 
 .post-button {
@@ -109,6 +119,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
+}
+
+.delete-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.delete-button {
+    margin-left: 12px;
 }
 
 .title-comments {

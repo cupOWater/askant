@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../assets/styles/ForumHome.css";
-import ArrowClockwise from "../assets/images/arrow-clockwise.svg"
+import ArrowClockwise from "../assets/images/arrow-clockwise.svg";
+import Check from "../assets/images/check-lg.svg";
 
 function ForumHome({ user }) {
   const comments = [  // delete dummy data later
@@ -162,6 +163,7 @@ function ForumHome({ user }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("latest");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [doVerify, setDoVerify] = useState(false);
 
   const fetchPosts = async () => {
     // bring post data from db
@@ -187,6 +189,12 @@ function ForumHome({ user }) {
       setSelectedCategory(null);
     } else {
       setSelectedCategory(category);
+    }
+
+    if (category === 'Verification') {
+      setDoVerify(true);
+    } else {
+      setDoVerify(false);
     }
   };
 
@@ -260,47 +268,64 @@ function ForumHome({ user }) {
                         <li onClick={() => handleCategorySelect('Free')}>Free</li>
                         <li onClick={() => handleCategorySelect('Trade')}>Trade</li>
                     </ul>
+                    {user !== undefined && user.type === 'admin' && (
+                    <p className="veri" onClick={() => handleCategorySelect('Verification')}><img className="Check" src={Check} /><strong>Verification</strong></p>
+                    )}
                 </div>
             </div>
             <div className="right-side">
-              <div className="top-menu">
-                <div className="dropdown-menu">
-                  <select className="btn btn-secondary dropdown-toggle" value={sortBy} onChange={(e) => handleSortChange(e.target.value)}>
-                    <option value="latest">Latest</option>
-                    <option value="comments">Comments</option>
-                  </select>
-                </div>
-                <button className="refresh-button btn btn-primary" onClick={handleRefresh}>
-                  <img className="ArrowClockwise" src={ArrowClockwise} />
-                </button>
+            {doVerify ? (
+              <div className="different-div">
+                {/* Content to show when doVerify is true */}
+                <p>Verification is in progress...</p>
               </div>
-            <div className="display-posts">
-                {currentPosts.map((post) => (
-                    <div key={post.id} className="posts-container">
-                        <div className="post-content">
-                          <div className="title-comments">
-                            <Link to={'/${post.id}'} state={{post}} className="post-title-link">
-                              <h3 className="post-title">{post.title}</h3>
-                            </Link>
-                            <p className='post-comments text-decoration-underline'>[{post.comments.length}]</p>
-                          </div>
-                          <p className="post-author">
-                            Written by {' '}
-                            <i className={post.userName === 'admin' ? 'admin-style' : ''}>
-                              {post.userName}
-                            </i>
-                          </p>
-                        </div>
-                        <div className="post-details">
-                            <p className='category-detail'>{post.category}</p>
-                            <p className='timestamp-detail'>{new Date(post.timestamp).toLocaleString()}</p>
-                        </div>
-                    </div>
-                ))}
-                <div className="pagination-container">
-                    {renderPaginationButtons()}
+            ) : (
+              <>
+                <div className="top-menu">
+                  <div className="dropdown-menu">
+                    <select className="btn btn-secondary dropdown-toggle" value={sortBy} onChange={(e) => handleSortChange(e.target.value)}>
+                      <option value="latest">Latest</option>
+                      <option value="comments">Comments</option>
+                    </select>
+                  </div>
+                  <button className="refresh-button btn btn-primary" onClick={handleRefresh}>
+                    <img className="ArrowClockwise" src={ArrowClockwise} />
+                  </button>
                 </div>
-            </div>
+                <div className="display-posts">
+                    {currentPosts.map((post) => (
+                        <div key={post.id} className="posts-container">
+                            <div className="post-content">
+                              <div className="title-comments">
+                                <Link to={'/${post.id}'} state={{post}} className="post-title-link">
+                                  <h3 className="post-title">{post.title}</h3>
+                                </Link>
+                                <p className='post-comments text-decoration-underline'>[{post.comments.length}]</p>
+                              </div>
+                              <p className="post-author">
+                                Written by {' '}
+                                <i className={post.userName === 'admin' ? 'admin-style' : ''}>
+                                  {post.userName}
+                                </i>
+                              </p>
+                            </div>
+                            <div className="post-details">
+                              <div className="delete-button-container">
+                                <p className='category-detail'>{post.category}</p>
+                                {user !== undefined && user.type === 'admin' && (
+                                  <button className="btn btn-danger btn-rounded delete-button">Delete</button>
+                                )}
+                              </div>
+                              <p className='timestamp-detail'>{new Date(post.timestamp).toLocaleString()}</p>
+                            </div>
+                        </div>
+                    ))}
+                    <div className="pagination-container">
+                        {renderPaginationButtons()}
+                    </div>
+                </div>
+              </>
+            )}
             </div>
         </div>
     )
