@@ -26,7 +26,7 @@ class AuthController {
 
             const refreshToken = jwt.sign(
                 {
-                    user_id: user._id,
+                    _id: user._id,
                     email: user.email,
                     isVerified: user.isVerified,
                     type: user.type
@@ -38,7 +38,7 @@ class AuthController {
             );
             const accessToken = jwt.sign(
                 {
-                    user_id: user._id,
+                    _id: user._id,
                     email: user.email,
                     isVerified: user.isVerified,
                     type: user.type
@@ -76,7 +76,7 @@ class AuthController {
             if (user && (await bcrypt.compare(password, user.password))) {
                 const refreshToken = jwt.sign(
                     {
-                        user_id: user._id,
+                        _id: user._id,
                         email: user.email,
                         isVerified: user.isVerified,
                         type: user.type
@@ -88,7 +88,7 @@ class AuthController {
                 );
                 const accessToken = jwt.sign(
                     {
-                        user_id: user._id,
+                        _id: user._id,
                         email: user.email,
                         isVerified: user.isVerified,
                         type: user.type
@@ -127,7 +127,7 @@ class AuthController {
             const user = jwt.verify(rToken, process.env.REFRESH_TOKEN_KEY);
             const accessToken = jwt.sign(
                 {
-                    user_id: user._id,
+                    _id: user._id,
                     email: user.email,
                     isVerified: user.isVerified,
                     type: user.type
