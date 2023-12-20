@@ -8,7 +8,7 @@ class UserController {
             if(!user){
                 return res.status(401).send();
             }
-            const userData = await User.findById(user.user_id);
+            const userData = await User.findById(user._id);
             const data = {
                 _id: userData._id,
                 userName: userData.userName,
@@ -37,7 +37,7 @@ class UserController {
         try {
             const user = req.user;
 
-            const data = await User.findById(user.user_id);
+            const data = await User.findById(user._id);
 
             data.isVerified = "pending";
             await data.save();
@@ -53,7 +53,7 @@ class UserController {
         try {
             const user = req.user;
 
-            const data = await User.findById(user.user_id);
+            const data = await User.findById(user._id);
 
             data.isVerified = "true";
             await data.save();
@@ -70,7 +70,7 @@ class UserController {
             const user = req.user;
             const newUserName = req.body.userName;
 
-            const userData = await User.findById(user.user_id);
+            const userData = await User.findById(user._id);
             
             userData.userName = newUserName
             await userData.save();
