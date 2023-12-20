@@ -4,6 +4,7 @@ import "../assets/styles/ForumHome.css";
 import ArrowClockwise from "../assets/images/arrow-clockwise.svg";
 import Check from "../assets/images/check-lg.svg";
 import { postService } from "../service/postService";
+import { userService } from "../service/userService";
 
 function ForumHome({ user }) {
   const [posts, setPosts] = useState([]);
@@ -11,6 +12,7 @@ function ForumHome({ user }) {
   const [sortBy, setSortBy] = useState("latest");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [doVerify, setDoVerify] = useState(false);
+  const [pendingUsers, setPendingUsers] = useState([]);
 
   const fetchPosts = async () => {
     try {
@@ -21,8 +23,18 @@ function ForumHome({ user }) {
     }
   };
 
+  const fetchPendingUsers = async () => {
+    try {
+      const res = await userService.getPendingUsers();
+      setPendingUsers(res.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
     fetchPosts();
+    fetchPendingUsers();
     const sortedPosts = sortPosts();
     setPosts(sortedPosts);
   }, [sortBy]);
@@ -58,6 +70,15 @@ function ForumHome({ user }) {
       console.log("Post ID:", postId);
       await postService.deletePost(postId);
       fetchPosts();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handlePending = async () => {
+    try {
+      const res = await userService.requestPending();
+      console.log(res); 
     } catch (error) {
       console.error(error);
     }
@@ -135,10 +156,27 @@ function ForumHome({ user }) {
                 </div>
             </div>
             <div className="right-side">
+            {user !== undefined && user.isVerified === "false" && (selectedCategory === null || selectedCategory === 'Trade') && (
+              <div className="not-verified">
+                <p>You are not verified.</p>
+                <p>You have to get verification from admin to access trading posts.</p>
+                <button className="pending-button btn btn-success" onClick={handlePending}>Request verification</button>
+              </div>
+            )}
+            {user !== undefined && user.isVerified === "pending" && (selectedCategory === null || selectedCategory === 'Trade') && (
+            <div className="check-pending">
+              <p>Verification request is pending.</p>
+              <p>Please wait for admin approval.</p>
+            </div>
+             )}
             {doVerify ? (
-              <div className="different-div">
-                {/* Content to show when doVerify is true */}
-                <p>Verification is in progress...</p>
+              <div className="pending-list">
+                {pendingUsers.map((user) => (
+                  <div key={user._id}>
+                    <p>{user.userName}</p>
+                    {/* 여기에 필요한 정보를 표시할 수 있습니다. */}
+                  </div>
+                ))}
               </div>
             ) : (
               <>

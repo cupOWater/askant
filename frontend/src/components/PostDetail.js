@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import forbidden from "../assets/images/forbidden.jpg"
+import Unauthorized from "../components/Unauthorized";
 import "../assets/styles/PostDetail.css";
 
 function PostDetail({ user }) {
@@ -10,12 +11,9 @@ function PostDetail({ user }) {
   const [comments, setComments] = useState(post.comments);
   const [newComment, setNewComment] = useState('');
 
-  useEffect(() => {
-    const commentsSorted = [...comments].sort((a, b) => {
-      return new Date(a.timestamps) - new Date(b.timestamps);
-    })
-    setComments(commentsSorted);
-  }, [comments])
+  const sortComments = (commentsArray) => {
+    return [...commentsArray].sort((a, b) => new Date(a.timestamps) - new Date(b.timestamps));
+  };
 
   const handleComment = (e) => {
     setNewComment(e.target.value);
@@ -33,16 +31,19 @@ function PostDetail({ user }) {
           timestamps: new Date().toISOString(),
         };
 
-        setComments([...comments, newCommentVal]);
+        const updatedComments = sortComments([...comments, newCommentVal]);
+        setComments(updatedComments);
         setNewComment('');
-
-        //window.location.reload(); // refresh(required?)
       } else {
         alert('Write any comments.');
         return;
       }
     }
   };
+
+  if (((user !== undefined && user.isVerified !== 'true') || user === undefined) && post.category === 'Trade') {
+    return <Unauthorized />
+  }
 
   return (
     <div className="detail-page">

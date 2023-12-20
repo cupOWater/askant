@@ -10,7 +10,6 @@ function Unauthorized() {
             <div className="unauthorized-img-container"/>
             <div className="unauthorized-text-container">
                 <h1>Access Denied</h1>
-                <p>Log In required.</p>
             </div>
             <button className="mt-4 go-back-btn" onClick={() => navigate("/")}>Go Back</button>
         </div>

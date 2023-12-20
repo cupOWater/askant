@@ -10,6 +10,33 @@ class UserService {
         }
     }
 
+    async getPendingUsers() {
+        try {
+          const res = await instance.get("/user/pendingUsers");
+          return res;
+        } catch (error) {
+            console.log(error);
+          return error;
+        }
+    }
+
+    async requestPending() {
+        try {
+            const res = await instance.post("/user/pending");
+            return res;
+        } catch (error) {
+            return error;
+        }
+    }
+    
+    async verifyUser() {
+        try {
+            const res = await instance.post("/user/verified");
+            return res;
+        } catch (error) {
+            return error;
+        }
+    }
 }
 
 export const userService = new UserService();

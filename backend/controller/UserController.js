@@ -23,18 +23,40 @@ class UserController {
         }
     }
 
+    async getPendingUsers(req, res) {
+        try {
+            const allPendingUsers = await User.find({ isVerified: 'pending' });
+            return res.status(200).send(allPendingUsers);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send();
+        }
+    }
+
+    async pending(req, res) {
+        try {
+            const user = req.user;
+
+            const data = await User.findById(user.user_id);
+
+            data.isVerified = "pending";
+            await data.save();
+
+            return res.status(200).send("Send request")
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send();
+        }
+    }
+
     async getVerified(req, res) {
         try {
             const user = req.user;
 
-            if(!user) {
-                return res.status(401).send();
-            }
+            const data = await User.findById(user.user_id);
 
-            const userData = await User.findById(user.user_id);
-
-            userData.isVerified = true;
-            await userData.save();
+            data.isVerified = "true";
+            await data.save();
 
             return res.status(200).send("User is verified")
         } catch (error) {
