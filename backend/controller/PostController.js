@@ -16,9 +16,7 @@ class PostController {
         const postId = req.params.postId;
       
         try {
-          const data = await Post.findById(postId);
-      
-          await data.remove();
+          const data = await Post.findByIdAndDelete(postId);
           return res.status(200).send("Post deleted");
         } catch (error) {
             console.log(error);
