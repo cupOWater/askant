@@ -1,9 +1,9 @@
 import instance from "./apiConfig";
 
-class UserService {
-    async getCurrent() {
+class PostService {
+    async getAllPosts() {
         try {
-            const res = await instance.get("/user");
+            const res = await instance.get("/post");
             return res;
         } catch (error) {
             return error;
@@ -12,4 +12,4 @@ class UserService {
 
 }
 
-export const userService = new UserService();
+export const postService = new PostService();

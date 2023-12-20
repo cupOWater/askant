@@ -12,7 +12,7 @@ function PostDetail({ user }) {
 
   useEffect(() => {
     const commentsSorted = [...comments].sort((a, b) => {
-      return new Date(a.timestamp) - new Date(b.timestamp);
+      return new Date(a.timestamps) - new Date(b.timestamps);
     })
     setComments(commentsSorted);
   }, [comments])
@@ -30,7 +30,7 @@ function PostDetail({ user }) {
         const newCommentVal = {
           userName: user.userName,
           content: newComment,
-          timestamp: new Date().toISOString(),
+          timestamps: new Date().toISOString(),
         };
 
         setComments([...comments, newCommentVal]);
@@ -78,7 +78,7 @@ function PostDetail({ user }) {
                     <p className={`comment-userid ${comment.userName === 'admin' ? 'admin-style' : ''}`}>
                       {comment.userName}
                     </p>
-              <p className='comment-timestamp'>{new Date(comment.timestamp).toLocaleString()}</p>
+              <p className='comment-timestamp'>{new Date(comment.timestamps).toLocaleString()}</p>
               <p className='comment-content'>{comment.content}</p>
             </li>
           ))}

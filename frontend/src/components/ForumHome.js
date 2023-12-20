@@ -3,171 +3,22 @@ import { Link } from 'react-router-dom';
 import "../assets/styles/ForumHome.css";
 import ArrowClockwise from "../assets/images/arrow-clockwise.svg";
 import Check from "../assets/images/check-lg.svg";
+import { postService } from "../service/postService";
 
 function ForumHome({ user }) {
-  const comments = [  // delete dummy data later
-    {
-      userName: "david4231", 
-      content: "I agree with it", 
-      timestamp: "2023-11-20T03:55:39.106+00:00"}, 
-    {
-      userName: "khoi4231", 
-      content: "nice opinion!", 
-      timestamp: "2023-11-20T04:50:13.106+00:00"
-    },     {
-      userName: "asdf1234", 
-      content: "I agree with it", 
-      timestamp: "2023-11-20T07:20:12.106+00:00"},
-      {
-        userName: "test3466", 
-        content: "I agree with it", 
-        timestamp: "2023-11-20T04:33:39.106+00:00"}, 
-        {
-          userName: "admin", 
-          content: "I agree with it", 
-          timestamp: "2023-11-20T05:11:11.106+00:00"}, 
-  ];
-
-  const dummyData = [ // delete dummy data later
-      {
-        id: 1,
-        title: 'save ants',
-        userName: 'admin',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Announcement',
-        comments: comments
-      },
-      {
-        id: 2,
-        title: 'how to feed ants',
-        userName: 'david4231',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Discussion',
-        comments: comments,
-      },
-      {
-        id: 3,
-        title: 'any recommend tools for ant?',
-        userName: 'khoi3344',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Q&A',
-        comments: comments,
-      },      {
-        id: 4,
-        title: 'some advices to beginner',
-        userName: 'long6412',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Free',
-        comments: comments,
-      },      {
-        id: 5,
-        title: 'COME AND SEE MY ANTS',
-        userName: 'long6412',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Free',
-        comments: comments,
-      },      {
-        id: 6,
-        title: 'I lost my ants...',
-        userName: 'khoi3344',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Free',
-        comments: comments,
-      },      {
-        id: 7,
-        title: ":)))",
-        userName: 'admin',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Announcement',
-        comments: comments,
-      },      {
-        id: 8,
-        title: 'recommend some music',
-        userName: 'david4231',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:52:38.106+00:00',
-        category: 'Trade',
-        comments: comments,
-      },      {
-        id: 9,
-        title: 'my ants are dead.',
-        userName: 'tony1234',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T01:51:38.106+00:00',
-        category: 'Trade',
-        comments: comments,
-      },      {
-        id: 10,
-        title: 'books for ants',
-        userName: 'khoi3344',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Q&A',
-        comments: comments,
-      },
-      {
-        id: 11,
-        title: "DON'T DO THIS BEHAIVOR",
-        userName: 'david4231',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Discussion',
-        comments: comments,
-      },
-      {
-        id: 12,
-        title: "hi im newbieeee :D",
-        userName: 'long6412',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Q&A',
-        comments: comments,
-      },
-      {
-        id: 13,
-        title: 'rules to feed ants',
-        userName: 'long6412',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Free',
-        comments: comments,
-      },
-      {
-        id: 14,
-        title: 'hello',
-        userName: 'tony1234',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Discussion',
-        comments: comments,
-      },
-      {
-        id: 15,
-        title: 'any tv show recommendation?',
-        userName: 'david4231',
-        content: 'ants are unique!',
-        timestamp: '2023-11-20T03:54:38.106+00:00',
-        category: 'Free',
-        comments: comments,
-      },
-    ];
-
-  const [posts, setPosts] = useState(dummyData); // change [](blank list) to later
+  const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState("latest");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [doVerify, setDoVerify] = useState(false);
 
   const fetchPosts = async () => {
-    // bring post data from db
-    // setPosts(real data);
+    try {
+      const res = await postService.getAllPosts();
+      setPosts(res.data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
   };
 
   useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
@@ -204,7 +55,7 @@ function ForumHome({ user }) {
 
   const sortPosts = () => { // sorting method
     if (sortBy === 'latest') {
-      return posts.slice().sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      return posts.slice().sort((a, b) => new Date(b.timestamps) - new Date(a.timestamps));
     } else if (sortBy === 'comments') {
       return posts.slice().sort((a, b) => b.comments.length - a.comments.length);
     }
@@ -316,7 +167,7 @@ function ForumHome({ user }) {
                                   <button className="btn btn-danger btn-rounded delete-button">Delete</button>
                                 )}
                               </div>
-                              <p className='timestamp-detail'>{new Date(post.timestamp).toLocaleString()}</p>
+                              <p className='timestamp-detail'>{new Date(post.timestamps).toLocaleString()}</p>
                             </div>
                         </div>
                     ))}
