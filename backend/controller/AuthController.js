@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const aTokenExp = 60 * 15;
 const rTokenExp = "24h";
 
-class AuthController { 
+class AuthController {
     async register(req, res) {
         try {
             const { userName, email, password } = req.body;
@@ -25,14 +25,24 @@ class AuthController {
             })
 
             const refreshToken = jwt.sign(
-                { user_id: user._id, email },
+                {
+                    user_id: user._id,
+                    email: user.email,
+                    isVerified: user.isVerified,
+                    type: user.type
+                },
                 process.env.REFRESH_TOKEN_KEY,
                 {
                     expiresIn: rTokenExp
                 }
             );
             const accessToken = jwt.sign(
-                { user_id: user._id, email },
+                {
+                    user_id: user._id,
+                    email: user.email,
+                    isVerified: user.isVerified,
+                    type: user.type
+                },
                 process.env.ACCESS_TOKEN_KEY,
                 {
                     expiresIn: aTokenExp
@@ -48,7 +58,7 @@ class AuthController {
                 type: user.type
             }
 
-            res.status(201).send({user: resUser, accessToken: accessToken});
+            res.status(201).send({ user: resUser, accessToken: accessToken });
         } catch (err) {
             console.log(err);
             res.status(500).send()
@@ -65,14 +75,24 @@ class AuthController {
             const user = await User.findOne({ email });
             if (user && (await bcrypt.compare(password, user.password))) {
                 const refreshToken = jwt.sign(
-                    { user_id: user._id, email },
+                    {
+                        user_id: user._id,
+                        email: user.email,
+                        isVerified: user.isVerified,
+                        type: user.type
+                    },
                     process.env.REFRESH_TOKEN_KEY,
                     {
                         expiresIn: rTokenExp
                     }
                 );
                 const accessToken = jwt.sign(
-                    { user_id: user._id, email },
+                    {
+                        user_id: user._id,
+                        email: user.email,
+                        isVerified: user.isVerified,
+                        type: user.type
+                    },
                     process.env.ACCESS_TOKEN_KEY,
                     {
                         expiresIn: aTokenExp
@@ -88,7 +108,7 @@ class AuthController {
                     type: user.type
                 }
 
-                return res.status(200).send({user: resUser, accessToken: accessToken});
+                return res.status(200).send({ user: resUser, accessToken: accessToken });
             }
             res.status(400).send("Invalid Credential")
         } catch (err) {
@@ -106,7 +126,12 @@ class AuthController {
         try {
             const user = jwt.verify(rToken, process.env.REFRESH_TOKEN_KEY);
             const accessToken = jwt.sign(
-                { user_id: user.user_id, email: user.email },
+                {
+                    user_id: user._id,
+                    email: user.email,
+                    isVerified: user.isVerified,
+                    type: user.type
+                },
                 process.env.ACCESS_TOKEN_KEY,
                 {
                     expiresIn: aTokenExp

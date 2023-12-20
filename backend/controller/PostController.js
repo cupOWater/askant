@@ -5,7 +5,7 @@ class PostController {
         try {
             const data = await Post.find();
         
-            return res.status(200).json(data);
+            return res.status(200).send(data);
           } catch (error) {
             console.log(error);
             return res.status(500).send();
@@ -19,7 +19,7 @@ class PostController {
           const data = await Post.findById(postId);
       
           await data.remove();
-          return res.status(200).json({ message: 'post deleted' });
+          return res.status(200).send("Post deleted");
         } catch (error) {
             console.log(error);
             return res.status(500).send();
