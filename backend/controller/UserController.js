@@ -65,17 +65,16 @@ class UserController {
         }
     }
 
-    async changeUserName(req, res) {
+    async refuseVerified(req, res) {
         try {
             const user = req.user;
-            const newUserName = req.body.userName;
 
-            const userData = await User.findById(user._id);
-            
-            userData.userName = newUserName
-            await userData.save();
+            const data = await User.findById(user._id);
 
-            return res.status(200).send("Username has been changed.")
+            data.isVerified = "false";
+            await data.save();
+
+            return res.status(200).send("Decline to verify")
         } catch (error) {
             console.log(error);
             return res.status(500).send();

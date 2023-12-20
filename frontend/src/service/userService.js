@@ -37,6 +37,15 @@ class UserService {
             return error;
         }
     }
+
+    async refuseVerified() {
+        try {
+            const res = await instance.post("/user/refused");
+            return res;
+        } catch (error) {
+            return error;
+        }
+    }
 }
 
 export const userService = new UserService();

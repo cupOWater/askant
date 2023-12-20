@@ -34,7 +34,9 @@ function ForumHome({ user }) {
 
   useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
     fetchPosts();
-    fetchPendingUsers();
+    if (user !== undefined && user.type === 'admin') {
+      fetchPendingUsers();
+    }
     const sortedPosts = sortPosts();
     setPosts(sortedPosts);
   }, [sortBy]);
