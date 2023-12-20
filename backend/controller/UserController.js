@@ -70,10 +70,6 @@ class UserController {
             const user = req.user;
             const newUserName = req.body.userName;
 
-            if(!user) {
-                return res.status(401).send();
-            }
-
             const userData = await User.findById(user.user_id);
             
             userData.userName = newUserName
