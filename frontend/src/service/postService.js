@@ -10,6 +10,14 @@ class PostService {
         }
     }
 
+    async deletePost(postId) {
+        try {
+            const res = await instance.delete(`/post/${postId}`);
+            return res;
+        } catch (error) {
+            return error;
+        }
+    }
 }
 
 export const postService = new PostService();

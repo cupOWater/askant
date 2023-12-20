@@ -17,7 +17,7 @@ function ForumHome({ user }) {
       const res = await postService.getAllPosts();
       setPosts(res.data);
     } catch (error) {
-      console.error("Error fetching posts:", error);
+      console.error(error);
     }
   };
 
@@ -51,6 +51,16 @@ function ForumHome({ user }) {
 
   const handleRefresh = () => {
     fetchPosts();
+  };
+
+  const handleDeletePost = async (postId) => {
+    try {
+      console.log("Post ID:", postId);
+      await postService.deletePost(postId);
+      fetchPosts();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const sortPosts = () => { // sorting method
@@ -145,10 +155,10 @@ function ForumHome({ user }) {
                 </div>
                 <div className="display-posts">
                     {currentPosts.map((post) => (
-                        <div key={post.id} className="posts-container">
+                        <div key={post._id} className="posts-container">
                             <div className="post-content">
                               <div className="title-comments">
-                                <Link to={'/${post.id}'} state={{post}} className="post-title-link">
+                                <Link to={`/${post._id}`} state={{post}} className="post-title-link">
                                   <h3 className="post-title">{post.title}</h3>
                                 </Link>
                                 <p className='post-comments text-decoration-underline'>[{post.comments.length}]</p>
@@ -164,7 +174,7 @@ function ForumHome({ user }) {
                               <div className="delete-button-container">
                                 <p className='category-detail'>{post.category}</p>
                                 {user !== undefined && user.type === 'admin' && (
-                                  <button className="btn btn-danger btn-rounded delete-button">Delete</button>
+                                  <button className="btn btn-danger btn-rounded delete-button" onClick={() => handleDeletePost(post._id)}>Delete</button>
                                 )}
                               </div>
                               <p className='timestamp-detail'>{new Date(post.timestamps).toLocaleString()}</p>
