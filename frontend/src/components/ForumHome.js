@@ -39,7 +39,7 @@ function ForumHome({ user }) {
     }
     const sortedPosts = sortPosts();
     setPosts(sortedPosts);
-  }, [sortBy]);
+  }, [sortBy, user]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -69,7 +69,6 @@ function ForumHome({ user }) {
 
   const handleDeletePost = async (postId) => {
     try {
-      console.log("Post ID:", postId);
       await postService.deletePost(postId);
       fetchPosts();
     } catch (error) {
@@ -80,11 +79,33 @@ function ForumHome({ user }) {
   const handlePending = async () => {
     try {
       const res = await userService.requestPending();
-      console.log(res); 
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
   };
+
+  const handleAccept = async (userId) => {
+    try {
+      const response = await userService.verifyUser(userId);
+      
+      const updatedUsers = pendingUsers.filter(user => user._id !== userId);
+      setPendingUsers(updatedUsers);
+    } catch (error) {
+      console.error('Error accepting user:', error);
+    }
+  }
+
+  const handleDecline = async (userId) => {
+    try {
+      const response = await userService.refuseUser(userId);
+
+      const updatedUsers = pendingUsers.filter(user => user._id !== userId);
+      setPendingUsers(updatedUsers);
+    } catch (error) {
+      console.error('Error declining user:', error);
+    }
+  }
 
   const sortPosts = () => { // sorting method
     if (sortBy === 'latest') {
@@ -172,13 +193,19 @@ function ForumHome({ user }) {
             </div>
              )}
             {doVerify ? (
-              <div className="pending-list">
-                {pendingUsers.map((user) => (
-                  <div key={user._id}>
-                    <p>{user.userName}</p>
-                    {/* 여기에 필요한 정보를 표시할 수 있습니다. */}
-                  </div>
-                ))}
+              <div className="pending-container">
+              <h2 className='pending-list-text'>Pending list</h2>
+                <div className="pending-list">
+                  {pendingUsers.map((user) => (
+                    <li key={user._id}>
+                      <p>{user.userName} ({user.email})</p>
+                      <div className="pending-buttons-conatiner">
+                        <button className='btn btn-success' onClick={() => handleAccept(user._id)}>Accept</button>
+                        <button className='btn btn-danger' onClick={() => handleDecline(user._id)}>Decline</button>
+                      </div>
+                    </li>
+                  ))}
+                </div>
               </div>
             ) : (
               <>

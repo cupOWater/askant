@@ -49,32 +49,38 @@ class UserController {
         }
     }
 
-    async getVerified(req, res) {
+    async verifyUser(req, res) {
         try {
-            const user = req.user;
+            const userId = req.body.userId;
+            const user = await User.findById(userId);
 
-            const data = await User.findById(user._id);
+            if (!user) {
+                return res.status(404).send("User not found");
+            }
 
-            data.isVerified = "true";
-            await data.save();
+            user.isVerified = true;
+            await user.save();
 
-            return res.status(200).send("User is verified")
+            return res.status(200).send("User is verified");
         } catch (error) {
             console.log(error);
             return res.status(500).send();
         }
     }
 
-    async refuseVerified(req, res) {
+    async refuseUser(req, res) {
         try {
-            const user = req.user;
+            const userId = req.body.userId;
+            const user = await User.findById(userId);
 
-            const data = await User.findById(user._id);
+            if (!user) {
+                return res.status(404).send("User not found");
+            }
 
-            data.isVerified = "false";
-            await data.save();
+            user.isVerified = false;
+            await user.save();
 
-            return res.status(200).send("Decline to verify")
+            return res.status(200).send("User verification declined");
         } catch (error) {
             console.log(error);
             return res.status(500).send();

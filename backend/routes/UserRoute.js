@@ -8,8 +8,8 @@ router.use(auth)
 router.get("/", UserController.getCurrent);
 router.post("/pending", UserController.pending);
 
-router.post("/verified", adminAuth, UserController.getVerified);
-router.post("/refused", adminAuth, UserController.refuseVerified);
+router.post("/verified", adminAuth, UserController.verifyUser);
+router.post("/refused", adminAuth, UserController.refuseUser);
 router.get("/pendingUsers", adminAuth, UserController.getPendingUsers);
 
 module.exports = router

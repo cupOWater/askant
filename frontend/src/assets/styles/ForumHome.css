@@ -109,6 +109,45 @@
     text-align: center;
 }
 
+.pending-container {
+    margin: 20px 0 0 350px;
+    text-align: center;
+    width: 600px;
+}
+
+.pending-list {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+  
+.pending-list-text {
+    margin-bottom: 20px;
+}
+
+.pending-list li {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.pending-list li p {
+    margin-top: 10px;
+}
+
+.pending-buttons-conatiner {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+}
+
 .display-posts {
     height: 100%;
 }

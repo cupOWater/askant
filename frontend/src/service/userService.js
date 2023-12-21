@@ -29,22 +29,22 @@ class UserService {
         }
     }
     
-    async verifyUser() {
+    async verifyUser(userId) {
         try {
-            const res = await instance.post("/user/verified");
+            const res = await instance.post(`/user/verified`, { userId });
             return res;
-        } catch (error) {
+          } catch (error) {
             return error;
-        }
+          }
     }
 
-    async refuseVerified() {
+    async refuseUser(userId) {
         try {
-            const res = await instance.post("/user/refused");
+            const res = await instance.post(`/user/refused`, { userId });
             return res;
-        } catch (error) {
+          } catch (error) {
             return error;
-        }
+          }
     }
 }
 
