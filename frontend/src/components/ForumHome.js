@@ -233,7 +233,7 @@ function ForumHome({ user }) {
                               <p className="post-author">
                                 Written by {' '}
                                 <i className={post.userName === 'admin' ? 'admin-style' : ''}>
-                                  {post.userName}
+                                  {post.user.userName}
                                 </i>
                               </p>
                             </div>
@@ -244,7 +244,7 @@ function ForumHome({ user }) {
                                   <button className="btn btn-danger btn-rounded delete-button" onClick={() => handleDeletePost(post._id)}>Delete</button>
                                 )}
                               </div>
-                              <p className='timestamp-detail'>{new Date(post.timestamps).toLocaleString()}</p>
+                              <p className='timestamp-detail'>{new Date(post.createdAt).toLocaleString()}</p>
                             </div>
                         </div>
                     ))}

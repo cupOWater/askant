@@ -10,6 +10,15 @@ class PostService {
         }
     }
 
+    async createPost(content){
+        try {
+            const res = await instance.post("/post/create", content);
+            return res;
+        } catch (error) {
+            return error;
+        }
+    }
+
     async deletePost(postId) {
         try {
             const res = await instance.delete(`/post/${postId}`);

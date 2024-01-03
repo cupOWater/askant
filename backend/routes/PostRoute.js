@@ -4,17 +4,15 @@ const auth = require("../middleware/auth");
 const adminAuth = require("../middleware/adminAuth");
 const PostController = require("../controller/PostController")
 
+// No Auth
 router.get("/", PostController.getAllPosts);
 
+// User Auth
 router.use(auth);
+router.post("/create", PostController.createPost);
+
+// Admin Auth
 router.use(adminAuth);
-
-// For testing the admin auth
-// Delete when not needed
-router.get("/test", adminAuth, (req, res) => {
-    res.send("TESTING TESTING");
-})
-
 router.delete("/:postId", adminAuth, PostController.deletePost);
 
 module.exports = router

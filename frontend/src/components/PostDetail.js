@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import forbidden from "../assets/images/forbidden.jpg"
+import 'react-quill/dist/quill.bubble.css';
 import Unauthorized from "../components/Unauthorized";
 import "../assets/styles/PostDetail.css";
+import ReactQuill from 'react-quill';
 
 function PostDetail({ user }) {
   const location = useLocation();
-  const { post } = location.state; 
+  const { post } = location.state;
 
   const [comments, setComments] = useState(post.comments);
   const [newComment, setNewComment] = useState('');
@@ -20,7 +21,7 @@ function PostDetail({ user }) {
   };
 
   const handleAddComment = () => {
-    if(user === undefined) {
+    if (user === undefined) {
       alert('Log in required.');
       return;
     } else {
@@ -55,11 +56,12 @@ function PostDetail({ user }) {
         </div>
       </div>
       <div className="post-detail-content">
-        <div className="post-detail-pic">
-          <img src={forbidden} className="post-image" />
-        </div>
         <div className="post-detail-text">
-          <p>{post.content}</p>
+          <ReactQuill
+            value={post.content}
+            readOnly={true}
+            theme={"bubble"}
+          />
         </div>
       </div>
       <div className="comments-section">
@@ -76,16 +78,16 @@ function PostDetail({ user }) {
         <ul className="display-comment">
           {comments.map((comment, index) => (
             <li key={index}>
-                    <p className={`comment-userid ${comment.userName === 'admin' ? 'admin-style' : ''}`}>
-                      {comment.userName}
-                    </p>
-              <p className='comment-timestamp'>{new Date(comment.timestamps).toLocaleString()}</p>
+              <p className={`comment-userid ${comment.user.userName === 'admin' ? 'admin-style' : ''}`}>
+                {comment.user.userName}
+              </p>
+              <p className='comment-timestamp'>{new Date(comment.createdAt).toLocaleString()}</p>
               <p className='comment-content'>{comment.content}</p>
             </li>
           ))}
         </ul>
       </div>
-  </div>
+    </div>
   );
 }
 
