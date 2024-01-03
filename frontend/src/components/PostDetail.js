@@ -1,40 +1,50 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.bubble.css';
 import Unauthorized from "../components/Unauthorized";
 import "../assets/styles/PostDetail.css";
 import ReactQuill from 'react-quill';
+import { postService } from '../service/postService';
 
 function PostDetail({ user }) {
-  const location = useLocation();
-  const { post } = location.state;
-
-  const [comments, setComments] = useState(post.comments);
+  const { postId } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [post, setPost] = useState();
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
 
+  useEffect(() => {
+    postService.getPost(postId).then(res => {
+      if(res.status === 200){
+        const data = res.data;
+        setPost(data);
+        setComments(sortComments(data.comments));
+        setIsLoading(false);
+      }
+    })
+  }, [])
+
   const sortComments = (commentsArray) => {
-    return [...commentsArray].sort((a, b) => new Date(a.timestamps) - new Date(b.timestamps));
+    return [...commentsArray].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   const handleComment = (e) => {
     setNewComment(e.target.value);
   };
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (user === undefined) {
       alert('Log in required.');
       return;
     } else {
       if (newComment.trim() !== '') {
-        const newCommentVal = {
-          userName: user.userName,
-          content: newComment,
-          timestamps: new Date().toISOString(),
-        };
-
-        const updatedComments = sortComments([...comments, newCommentVal]);
-        setComments(updatedComments);
-        setNewComment('');
+        const res = await postService.createComment(post._id, newComment);
+        console.log(res);
+        if (res.status === 201) {
+          const updatedComments = sortComments(res.data);
+          setComments(updatedComments);
+          setNewComment('');
+        }
       } else {
         alert('Write any comments.');
         return;
@@ -42,6 +52,9 @@ function PostDetail({ user }) {
     }
   };
 
+  if(isLoading){
+    return <></>
+  }
   if (((user !== undefined && user.isVerified !== 'true') || user === undefined) && post.category === 'Trade') {
     return <Unauthorized />
   }

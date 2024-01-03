@@ -169,8 +169,8 @@ function ForumHome({ user }) {
                     <p className="all-dis" onClick={() => handleCategorySelect('All')}><strong>All discussion</strong></p>
                     <ul className="cate-list">
                         <li onClick={() => handleCategorySelect('Announcement')}>Announcement</li>
+                        <li onClick={() => handleCategorySelect('General')}>General</li>
                         <li onClick={() => handleCategorySelect('Q&A')}>Q&A</li>
-                        <li onClick={() => handleCategorySelect('Free')}>Free</li>
                         <li onClick={() => handleCategorySelect('Trade')}>Trade</li>
                     </ul>
                     {user !== undefined && user.type === 'admin' && (

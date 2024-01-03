@@ -69,8 +69,8 @@ function Post({ user }) {
         } else {
             const res = await postService.createPost({ title: title, category: category, content: content });
             if(res.status === 201){
-                alert("Post created successfully");
                 navigate("/");
+                alert("Post created successfully");
             }
         }
     };

@@ -6,9 +6,10 @@ const PostController = require("../controller/PostController")
 
 // No Auth
 router.get("/", PostController.getAllPosts);
-
+router.get("/:postId", PostController.getPost);
 // User Auth
 router.use(auth);
+router.post("/comment", PostController.createComment);
 router.post("/create", PostController.createPost);
 
 // Admin Auth
