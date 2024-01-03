@@ -32,8 +32,12 @@ function ForumHome({ user }) {
     }
   };
 
-  useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
+  useEffect(() => {
     fetchPosts();
+  }, []);
+
+  useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
+    
     if (user !== undefined && user.type === 'admin') {
       fetchPendingUsers();
     }
@@ -109,7 +113,7 @@ function ForumHome({ user }) {
 
   const sortPosts = () => { // sorting method
     if (sortBy === 'latest') {
-      return posts.slice().sort((a, b) => new Date(b.timestamps) - new Date(a.timestamps));
+      return posts.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortBy === 'comments') {
       return posts.slice().sort((a, b) => b.comments.length - a.comments.length);
     }
