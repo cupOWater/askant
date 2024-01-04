@@ -1,10 +1,6 @@
-@media only screen and (max-width: 868px) {
-    .sidebar {
-        width: 156.24px;
-    }
-
-    .right-side {
-        width: 711.76px;
+@media only screen and (max-width: 1200px) {
+    .forum-page {
+        width: 1200px;
     }
 }
 
