@@ -1,54 +1,35 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "../assets/styles/Shop.css";
 import { productService } from '../service/productService';
 import SideBar from './SideBar';
 
-function Shop(){
-    // const fakeData = [
-    //     { id: 1, category: 'Electronics',image: fireAnt, name: 'Smartphone', price: '$500', shopName: 'Askant' },
-    //     { id: 2, category: 'Electronics',image: fireAnt, name: 'Laptop', price: '$1000' , shopName: 'Askant'},
-    //     { id: 3, category: 'Electronics',image: fireAnt, name: 'Headphones', price: '$50', shopName: 'Askant' },
-    //     { id: 4, category: 'Electronics',image: fireAnt, name: 'Smartwatch', price: '$150' , shopName: 'Askant'},
-    //     { id: 5, category: 'Electronics',image: fireAnt, name: 'Tablet', price: '$300', shopName: 'Askant' },
-    //     { id: 6, category: 'Clothing',image: fireAnt, name: 'T-Shirt', price: '$20' , shopName: 'Askant'},
-    //     { id: 7, category: 'Clothing',image: fireAnt, name: 'Jeans', price: '$50', shopName: 'Askant' },
-    //     { id: 8, category: 'Clothing',image: fireAnt, name: 'Hoodie', price: '$40', shopName: 'Askant' },
-    //     { id: 9, category: 'Clothing',image: fireAnt, name: 'Sneakers', price: '$60' , shopName: 'Askant'},
-    //     { id: 10, category: 'Clothing',image: fireAnt, name: 'Dress', price: '$70', shopName: 'Askant' },
-    //     { id: 11, category: 'Books',image: fireAnt, name: 'JavaScript Book', price: '$30', shopName: 'Askant' },
-    //     { id: 12, category: 'Books',image: fireAnt, name: 'React Book', price: '$35', shopName: 'Askant' },
-    //     { id: 13, category: 'Books',image: fireAnt, name: 'Python Book', price: '$25', shopName: 'Askant' },
-    //     { id: 14, category: 'Books',image: fireAnt, name: 'Data Science Book', price: '$40', shopName: 'Askant' },
-    //     { id: 15, category: 'Books',image: fireAnt, name: 'Design Patterns Book', price: '$45', shopName: 'Askant' },
-    
-    // ];
+function Shop() {
+  const [product, setProduct] = useState([])
+  // const products = product.length;
 
-    const [product, setProduct] = useState([])
-    // const products = product.length;
+  const fetchProducts = async () => {
+    try {
+      const res = await productService.getAllProducts();
+      setProduct(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const fetchProducts = async () => {
-      try {
-        const res = await productService.getAllProducts();
-        setProduct(res.data);
-      } catch (error){
-        console.log(error);
-      }
-    };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-    useEffect(() => {
-      fetchProducts();
-    }, []);
+  const groupedProducts = product.reduce((acc, product) => {
+    acc[product.category] = [...(acc[product.category] || []), product];
+    return acc;
+  }, {});
 
-    const groupedProducts = product.reduce((acc, product) => {
-        acc[product.category] = [...(acc[product.category] || []), product];
-        return acc;
-    }, {});
-
-    return (
+  return (
     <div className="container-fluid">
       <div className="row">
-        <SideBar/>
-        
+        <SideBar />
+
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 mt-1 mb-1">
 
           {Object.keys(groupedProducts).map((category) => (
@@ -57,14 +38,16 @@ function Shop(){
               <div className="row">
                 {groupedProducts[category].slice(0, 5).map((product) => (
                   <div key={product.id} className="col-md-4 mb-3">
-                    <div className="card">
-                      <img src={product.image} className="mx-auto d-block img-fluid" alt={product.name} style={{width:'25%', height: 'auto'}} />
-                      <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
-                        <p className="card-text">Price: {product.price}</p>
-                        <p className="card-text">Shop: {product.shopName}</p>
+                    <a href={product.link}>
+                      <div className="card">
+                        <img src={product.img} className="mx-auto d-block img-fluid" alt={product.name} style={{ width: '25%', height: 'auto' }} />
+                        <div className="card-body">
+                          <h5 className="card-title">{product.name}</h5>
+                          <p className="card-text">Price: {product.price}</p>
+                          <p className="card-text">Shop: {product.shopName}</p>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 ))}
               </div>
@@ -73,7 +56,7 @@ function Shop(){
         </main>
       </div>
     </div>
-    )
+  )
 }
 
 export default Shop;

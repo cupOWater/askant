@@ -24,7 +24,7 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
                             <Link className="leftItems" to={"/"}>Forum</Link>
                         </li>
                         <li className="headerLeftItem fst-normal">
-                            <Link className="leftItems" to={"/"}>Shopping</Link>
+                            <Link className="leftItems" to={"/shop"}>Shop</Link>
                         </li>
                     </div>
                     <div className="headerCenter">

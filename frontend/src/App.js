@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/" element={<ForumHome user={user}/>} />
           <Route exact path="/:postId" element={<PostDetail user={user}/>} />
           <Route exact path="/post" element={<Post user={user}/>} />
-          <Route exact path="/" element={<Category />} />
+          <Route exact path="/shop" element={<Category />} />
 
 
           <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />

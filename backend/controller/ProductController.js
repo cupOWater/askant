@@ -4,8 +4,6 @@ class ProductController{
     async getAllProducts(req, res){
         try {
             const data = await Product.find()
-            // console.log('hello');
-            console.log(res.data);
             return res.status(200).send(data);
             
         } catch(error){
