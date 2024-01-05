@@ -68,7 +68,13 @@
 }
 
 a.active{
-  color:#B00C0C
+  color:#B00C0C;
+  text-decoration: none;
+}
+
+a.notActive{
+  text-decoration: none;
+  color:black;
 }
 
 
@@ -86,4 +92,22 @@ a.active{
 .container-fluid {
   max-height: auto;
   overflow-y: auto;
+  overflow-x: auto;
+  margin-bottom: 70px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.breadcrumb > .active a {
+  color:#B00C0C;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color:rgb(100, 98, 98);
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+  color:black;
+}
+

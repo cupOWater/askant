@@ -14,7 +14,6 @@
     align-items: center;
     flex-direction: column;
     box-sizing: border-box;
-    border-right: 1px solid #797777;
    
 }
 
@@ -75,20 +74,26 @@ a.active{
 }
 
 /* Product Display */
+
 .product-display{
-    width: 89%;
-    align-items: left;
-    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* max-height: 740px;
+    overflow-y: auto; */
 }
 .product-display .card-holder{
     width: fit-content;
-    display:inline-flex;
+    /* display:inline-flex; */
+    padding: 0px;
     margin: auto;
 }
 
 .product-display .card-holder a{
     text-decoration: none;
-    width: 12rem;
+    width: calc(33.33% - 20px);
+
+    /* width: 12rem; */
     padding: 0px;
     margin: 1rem 0.5rem 1rem 0.5rem;
 }
@@ -117,3 +122,19 @@ a.active{
     max-height: 100%;
     max-width: 100%;
 }
+
+/* Pagination.css */
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .pagination li {
+    margin-right: 10px;
+  }
+  
+  .pagination li.active {
+    font-weight: bold;
+  }

@@ -8,7 +8,7 @@ import "../assets/styles/footer.css";
 
 const Footer = () =>{
     return (
-        <footer className="footer bg-light mt-5">
+        <footer className="footer fixed-bottom  bg-light mt-10">
             <div className="container">
                 <div className="row">
                     

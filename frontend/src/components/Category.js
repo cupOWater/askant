@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import fireAnt from "../assets/images/fireAnt.png"
+import React, { useState, useEffect } from 'react';
+// import fireAnt from "../assets/images/fireAnt.png"
 import "../assets/styles/category.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ant from "../assets/images/ant.png"
 import shelter from "../assets/images/shelter.png"
 import food from "../assets/images/food.png"
-import tools from "../assets/images/tools.png"
 import { NavLink } from 'react-router-dom';
-import Footer from "./Footer";
+import { productService } from '../service/productService';
 
 <link
   rel="stylesheet"
@@ -16,69 +15,69 @@ import Footer from "./Footer";
   crossorigin="anonymous"
 />
 
-const products = [
-  {
-    name: 'Fire Ant',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 2',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 3',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 4',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 5',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 6',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 7',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 8',
-    price: '200.000 VND',
-    shopName: 'Ask Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 9',
-    price: '200.000 VND',
-    shopName: 'The Best Shop Ant',
-    image: fireAnt,
-  },
-  {
-    name: 'Product 9',
-    price: '200.000 VND',
-    shopName: 'Ant Canada',
-    image: fireAnt,
-  },
+// const products = [
+//   {
+//     name: 'Fire Ant',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 2',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 3',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 4',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 5',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 6',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 7',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 8',
+//     price: '200.000 VND',
+//     shopName: 'Ask Ant',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 9',
+//     price: '200.000 VND',
+//     shopName: 'The Best Ant Shop',
+//     image: fireAnt,
+//   },
+//   {
+//     name: 'Product 9',
+//     price: '200.000 VND',
+//     shopName: 'Ant Canada',
+//     image: fireAnt,
+//   },
 
-];
+// ];
 
 //Product List
 const ProductsList = ({ products }) => {
@@ -122,9 +121,27 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 };
 
 const Category = () => {
+  const [products, setProduct] = useState([])
+
+  const productsLength = products.length;
+
+  const fetchProducts = async () => {
+    try {
+      const res = await productService.getAllProducts();
+      setProduct(res.data);
+    } catch (error){
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log('hello')
+    fetchProducts();
+  }, []);
+
   const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const totalPages = Math.ceil(productsLength / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -133,12 +150,15 @@ const Category = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  
+  console.log('hello')
+  console.log('Products:', products);
 
   return (
     <div className="container-fluid">
+      
       <div className="row">
-        <nav className="col-md-2 d-none d-md-block sidebar text-center ">
-          {/* Sidebar content goes here */}
+        <nav className="col-md-2 sidebar text-center d-none d-md-block ">
           <div className="sidebar-sticky ">
             <h5>Category</h5>
             <ul class="category-list">
@@ -146,10 +166,10 @@ const Category = () => {
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
-                        isActive ? 'active' : ''
+                        isActive ? 'active' : 'notActive'
                         }
                     >
-                        <img src={ant} class="icon"/>Ants
+                        <img src={ant} class="icon" alt='ant'/>Ants
                     </NavLink>
                 </li>
 
@@ -157,10 +177,10 @@ const Category = () => {
                     <NavLink
                             to="/shelters"
                             className={({ isActive }) =>
-                            isActive ? 'active' : ''
+                            isActive ? 'active' : 'notActive'
                             }
                     >
-                        <img src={shelter} class="icon"/>Shelters
+                        <img src={shelter} class="icon" alt='Tank'/>Tank
                     </NavLink>
                 </li>
 
@@ -168,21 +188,10 @@ const Category = () => {
                     <NavLink
                         to="/foods"
                         className={({ isActive })  =>
-                        isActive ? 'active' : ''
+                        isActive ? 'active' : 'notActive'
                         }
                     >
-                        <img src={food} class="icon"/>Foods
-                    </NavLink>
-                </li>
-
-                <li class ="category-item">
-                    <NavLink
-                        to="/tools"
-                        className={({ isActive }) =>
-                        isActive ? 'active' : ''
-                        }
-                    >
-                        <img src={tools} class="icon"/>Tools
+                        <img src={food} class="icon" alt='Supply'/>Supply
                     </NavLink>
                 </li>
             </ul>
@@ -193,8 +202,8 @@ const Category = () => {
             <h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Shopping</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Ants</li>
+                        <li class="breadcrumb-item"><a href="/shop">Shopping</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="/ants">Ants</a></li>
                     </ol>
                 </nav>
             </h3>
@@ -202,8 +211,10 @@ const Category = () => {
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         </main>
       </div>
-      <Footer></Footer>
+     
     </div>
+    
+    
   );
 };
 
