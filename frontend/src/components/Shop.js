@@ -1,11 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Link, NavLink } from 'react-router-dom';
 import "../assets/styles/Shop.css";
-import ant from "../assets/images/ant.png"
-import shelter from "../assets/images/shelter.png"
-import food from "../assets/images/food.png"
-import fireAnt from "../assets/images/fireAnt.png"
 import { productService } from '../service/productService';
+import SideBar from './SideBar';
 
 function Shop(){
     // const fakeData = [
@@ -51,46 +47,8 @@ function Shop(){
     return (
     <div className="container-fluid">
       <div className="row">
-      <nav className="col-md-2 d-none d-md-block sidebar text-center ">
-          <div className="sidebar-sticky ">
-            <h5>Category</h5>
-            <ul class="category-list">
-                <li class ="category-item">
-                    <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                        isActive ? 'active' : 'notActive'
-                        }
-                    >
-                        <img src={ant} class="icon"/>Ants
-                    </NavLink>
-                </li>
-
-                <li class ="category-item">
-                    <NavLink
-                            to="/shelters"
-                            className={({ isActive }) =>
-                            isActive ? 'active' : 'notActive'
-                            }
-                    >
-                        <img src={shelter} class="icon"/>Tank
-                    </NavLink>
-                </li>
-
-                <li class ="category-item">
-                    <NavLink
-                        to="/foods"
-                        className={({ isActive })  =>
-                        isActive ? 'active' : 'notActive'
-                        }
-                    >
-                        <img src={food} class="icon"/>Supply
-                    </NavLink>
-                </li>
-            </ul>
-          </div>
-        </nav>
-
+        <SideBar/>
+        
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 mt-1 mb-1">
 
           {Object.keys(groupedProducts).map((category) => (

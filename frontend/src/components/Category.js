@@ -2,11 +2,8 @@ import React, { useState, useEffect } from 'react';
 // import fireAnt from "../assets/images/fireAnt.png"
 import "../assets/styles/category.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ant from "../assets/images/ant.png"
-import shelter from "../assets/images/shelter.png"
-import food from "../assets/images/food.png"
-import { NavLink } from 'react-router-dom';
 import { productService } from '../service/productService';
+import SideBar from './SideBar';
 
 <link
   rel="stylesheet"
@@ -123,12 +120,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 const Category = () => {
   const [products, setProduct] = useState([])
 
-  const productsLength = products.length;
-
+  
   const fetchProducts = async () => {
     try {
       const res = await productService.getAllProducts();
       setProduct(res.data);
+      console.log(res.data)
     } catch (error){
       console.log(error);
     }
@@ -141,7 +138,7 @@ const Category = () => {
 
   const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(productsLength / itemsPerPage);
+  const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -150,7 +147,7 @@ const Category = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
+
   console.log('hello')
   console.log('Products:', products);
 
@@ -158,46 +155,7 @@ const Category = () => {
     <div className="container-fluid">
       
       <div className="row">
-        <nav className="col-md-2 sidebar text-center d-none d-md-block ">
-          <div className="sidebar-sticky ">
-            <h5>Category</h5>
-            <ul class="category-list">
-                <li class ="category-item">
-                    <NavLink
-                        to="/"
-                        className={({ isActive }) =>
-                        isActive ? 'active' : 'notActive'
-                        }
-                    >
-                        <img src={ant} class="icon" alt='ant'/>Ants
-                    </NavLink>
-                </li>
-
-                <li class ="category-item">
-                    <NavLink
-                            to="/shelters"
-                            className={({ isActive }) =>
-                            isActive ? 'active' : 'notActive'
-                            }
-                    >
-                        <img src={shelter} class="icon" alt='Tank'/>Tank
-                    </NavLink>
-                </li>
-
-                <li class ="category-item">
-                    <NavLink
-                        to="/foods"
-                        className={({ isActive })  =>
-                        isActive ? 'active' : 'notActive'
-                        }
-                    >
-                        <img src={food} class="icon" alt='Supply'/>Supply
-                    </NavLink>
-                </li>
-            </ul>
-          </div>
-        </nav>
-
+       <SideBar/>
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
             <h3>
                 <nav aria-label="breadcrumb">

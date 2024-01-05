@@ -3,7 +3,7 @@ import instance from './apiConfig';
 class ProductService {
     async getAllProducts() {
         try{
-            const res = await instance.get("/products");
+            const res = await instance.get("/product");
             return res;
         } catch(error){
             return error;
