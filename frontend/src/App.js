@@ -9,13 +9,15 @@ import Admin from "./components/Admin"
 import Header from "./components/Header";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
-import Unauthorized from "./components/Unauthrozied";
+import Unauthorized from "./components/Unauthorized";
+import PostDetail from "./components/PostDetail";
+import Post from "./components/Post";
 import { useEffect, useState } from "react";
 import { userService } from "./service/userService";
 
 function App() {
   const [user, setUser] = useState();
-
+  
   useEffect(() => {
     if (localStorage.getItem("aToken")) {
       userService.getCurrent()
@@ -26,13 +28,15 @@ function App() {
         })
     }
   }, [])
-
+  
   return (
     <Router>
       <Header user={user} setUser={setUser} />
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<ForumHome />} />
+          <Route exact path="/" element={<ForumHome user={user}/>} />
+          <Route exact path="/:postId" element={<PostDetail user={user}/>} />
+          <Route exact path="/post" element={<Post user={user}/>} />
 
           <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />
           <Route exact path="/register" element={<Register setUser={setUser} />} />
