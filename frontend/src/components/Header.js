@@ -3,6 +3,7 @@ import logo from "../assets/images/logo.png"
 import PersonCircle from "../assets/images/person-circle.svg"
 import "../assets/styles/header.css";
 import { authService } from "../service/authService";
+import { Link } from "react-router-dom";
 
 function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
     const navigate = useNavigate();
@@ -19,8 +20,12 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
             <nav>
                 <ul>
                     <div className="headerLeft">
-                        <li className="headerLeftItem fst-normal"><a className="leftItems" href="/">Forum</a></li>
-                        <li className="headerLeftItem fst-normal"><a className="leftItems" href="#">Shopping</a></li>
+                        <li className="headerLeftItem fst-normal">
+                            <Link className="leftItems" to={"/"}>Forum</Link>
+                        </li>
+                        <li className="headerLeftItem fst-normal">
+                            <Link className="leftItems" to={"/"}>Shopping</Link>
+                        </li>
                     </div>
                     <div className="headerCenter">
                         <li className="headerCenterItem"><a href="/"><img src={logo} className="headerImage"></img></a></li>

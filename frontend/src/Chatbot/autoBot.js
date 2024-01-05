@@ -36,10 +36,7 @@ const AutoBot = () => {
 
   return (
     <div>
-      <h1 onClick={handleButtonClick}>Click me!</h1>
-      <button id="sayButton" onClick={handleButtonClick}>
-        Send message to chatbot
-      </button>
+      
     </div>
   );
 };
