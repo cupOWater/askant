@@ -1,4 +1,3 @@
-const e = require("express");
 const puppeteer = require("puppeteer");
 const ProductModel = require("../model/ProductModel");
 
@@ -38,9 +37,9 @@ const scrapeDomains = [
         ]),
     new ScrapeDomain("Ant Gear", ".product.type-product", ".woocommerce-loop-product__title", ".price", "img", null, ".woocommerce-LoopProduct-link.woocommerce-loop-product__link",
         [
-            {url: "https://antgear.com/product-category/ants/", cat: "Ant"},
-            {url: "https://antgear.com/product-category/housing/", cat: "Tank"},
-            {url: "https://antgear.com/product-category/supplies/", cat: "Supply"}
+            { url: "https://antgear.com/product-category/ants/", cat: "Ant" },
+            { url: "https://antgear.com/product-category/housing/", cat: "Tank" },
+            { url: "https://antgear.com/product-category/supplies/", cat: "Supply" }
         ]
     )
 ]
@@ -49,8 +48,9 @@ const scrapeDomains = [
 // Store as {productName, productPrice, productImgSrc, Domain, Category}
 async function scrapeWebsite(domains) {
     const result = []
-    const browser = await puppeteer.launch({ executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", headless: false });
-    // const browser = await puppeteer.launch({ headless: "new" });
+    // headless false for testing purposes
+    //const browser = await puppeteer.launch({ executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", headless: false });
+    const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
 
     for (const domain of domains) {
@@ -97,4 +97,13 @@ async function scrapeWebsite(domains) {
     return result;
 }
 
-module.exports = {scrapeDomains: scrapeDomains, scrapeWebsite: scrapeWebsite};
+
+async function scrape() {
+    console.log("Currently Scraping...")
+    const scrapeData = await scrapeWebsite(scrapeDomains);
+    console.log("Finished scraping")
+    await ProductModel.deleteMany({});
+    const result = await ProductModel.create(scrapeData);
+}
+
+module.exports = scrape;
