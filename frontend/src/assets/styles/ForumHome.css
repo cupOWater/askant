@@ -1,3 +1,9 @@
+@media only screen and (max-width: 1200px) {
+    .forum-page {
+        width: 1200px;
+    }
+}
+
 .forum-page {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     height: 100%;
@@ -12,7 +18,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     box-sizing: border-box;
 }
 
@@ -22,6 +27,7 @@
     padding: 8px 12px;
     border-radius: 5px;
     background-color: white;
+    text-align: center;
 }
 
 .all-dis:hover {
@@ -48,7 +54,8 @@
     text-align: center;
 }
 
-.cate-list li {
+.cate-list li,
+.veri {
     cursor: pointer;
     padding: 8px 12px;
     margin: 10px 0;
@@ -57,18 +64,84 @@
     flex: 1;
 }
 
-.cate-list li:hover {
+.cate-list li:hover,
+.veri:hover {
     background-color: #e0e0e0;
 }
 
+.veri {
+    margin-top: 170px;
+}
+
+.Check {
+    margin-right: 5px;
+}
+
 .post-button {
-    width: 60%;
+    width: 130px;
     margin-bottom: 10px;
     margin-top: 70px;
 }
 
 .right-side {
     width: 82%;
+}
+
+.not-verified {
+    width: 82%;
+    margin-top: 10px;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.check-pending {
+    width: 82%;
+    margin-top: 10px;
+    border: 2px solid green;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.pending-container {
+    margin: 20px 0 0 350px;
+    text-align: center;
+    width: 600px;
+}
+
+.pending-list {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+  
+.pending-list-text {
+    margin-bottom: 20px;
+}
+
+.pending-list li {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.pending-list li p {
+    margin-top: 10px;
+}
+
+.pending-buttons-conatiner {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
 }
 
 .display-posts {
@@ -80,8 +153,8 @@
     box-sizing: border-box;
 }
 
-.post-container {
-    width: 100%;
+.posts-container {
+    width: 82%;
     border-top: 1px solid #ccc;
     display: flex;
     align-items: center;
@@ -95,10 +168,19 @@
 }
 
 .post-details {
-    margin-top:15px;
+    margin-top: 15px;
     display: flex;
-    flex-direction: space-between;
+    flex-direction: column;
     align-items: flex-end; 
+}
+
+.delete-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.delete-button {
+    margin-left: 12px;
 }
 
 .title-comments {
@@ -125,7 +207,18 @@
     margin-bottom: 3px;
 }
 
+.admin-style {
+    color:red;
+}
+
+.category-detail,
+.timestamp-detail {
+    display: flex;
+    flex-direction: column;
+}
+
 .top-menu {
+    width: 82%;
     height: 25px;
     margin-top: 20px;
     display: flex;

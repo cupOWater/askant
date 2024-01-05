@@ -3,49 +3,54 @@
 // If the username is not unique(Already exists on database), the system should inform to user.
 // It requires backend work!
 
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { authService } from '../service/authService';
 
-function Register({ userType, user }) {
-    const fakeUserType = ""; // MUST delete after backend work is done; dummy
-    const fakeUsername = "Tony1234";  // MUST delete after backend work is done; dummy
-
-    const [ID, setID] = useState(""); // Entered username(ID)
-    // const [email, setEmail] = useState("");
-    // const [phone, setPhone] = useState("");
-    // const [address, setAddress] = useState("");
+function Register({setUser}) {
+    const [userName, setUserName] = useState(""); // Entered username(ID)
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState(""); // Entered password
-    
+    const navigate = useNavigate()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const response = await authService.register(userName, email, password);
+        if(response.status === 201){
+            setUser(response.data.user);
+            navigate("/");
+        }else{
+            alert(response.response.data)
+        }
+    }
+
     return (
         <>
-        {(fakeUserType==="User") // MUST change to 'userType' after backend work is done
+        {(localStorage.getItem("aToken"))
             ?
-            <div className="pt-5">
-                <h2 className='loggedIn-text'>You are logged in, {fakeUsername // MUST change to 'user.username' after backend work is done
-                } :D</h2> 
-            </div>
+            <Navigate to={"/"} replace={true}/>
             :
             <div className="login-container col-sm-8 mx-auto mt-5">
                 <h2 className='registration-text'>Registration</h2>
                 <hr />
                 <form 
-                //onSubmit={register} -> register process; make sure it should be functioned on backend work!
+                onSubmit={handleSubmit}
                 className="row">
                     <div className="mb-3">
-                        <label className="form-label">Username (ID)<span>*</span></label>
+                        <label className="form-label">Username<span>*</span></label>
                         <input 
                             className="form-control" 
                             id="userName"
                             type="text"
-                            placeholder="Enter your username (ID)..."  
-                            minLength="5" maxLength="12" 
-                            title="Username length must be from 5 to 12." 
-                            onChange={(e) => setID(e.target.value)} 
-                            value={ID}
+                            placeholder="Enter your username..."  
+                            minLength="5" maxLength="16" 
+                            title="Username length must be from 5 to 16." 
+                            onChange={(e) => setUserName(e.target.value)} 
+                            value={userName}
                             required
                         />
                     </div>
-                    {/* <div className="my-3 col-sm-6">
+                    <div className="mb-3">
                         <label className="form-label">Email<span>*</span></label>
                         <input 
                             className="form-control register-form" 
@@ -57,30 +62,6 @@ function Register({ userType, user }) {
                             required
                         />
                     </div>
-                    <div className="my-3 col-sm-6">
-                        <label className="form-label">Phone Number<span>*</span></label>
-                        <input 
-                            className="form-control phoneNumber" 
-                            id="userPhone" 
-                            type="number" 
-                            placeholder="Enter your phone number..." 
-                            onChange={(e) => setPhone(e.target.value)}
-                            value={phone}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label">Address<span>*</span></label>
-                        <input 
-                            className="form-control" 
-                            id="userAddress" 
-                            type="text" 
-                            placeholder="Enter your address..."  
-                            onChange={(e) => setAddress(e.target.value)}
-                            value={address}
-                            required
-                        />
-                    </div> */}
                     <div className="mb-5">
                         <label className="form-label">Password<span>*</span></label>
                         <input 
@@ -95,7 +76,7 @@ function Register({ userType, user }) {
                             required
                         />
                     </div>
-                    <button className="login-btn col-12 mb-3">REGISTER</button>
+                    <input type='submit' className="login-btn col-12 mb-3" value={"REGISTER"}/>
                     <p className="text-muted register-text">Are you a member? <Link to={"/login"}>Let's Login!</Link></p>
                 </form>
             </div>

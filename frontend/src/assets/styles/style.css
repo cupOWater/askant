@@ -61,7 +61,7 @@
     padding: 10px;
     margin-top: -10px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+    border-radius: 10px;
     &:hover {
         background-color: lightgreen;
         transition: ease-in-out 400ms;
