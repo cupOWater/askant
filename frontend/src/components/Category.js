@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import "../assets/styles/category.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { productService } from '../service/productService';
-import SideBar from './SideBar';
+import ant from "../assets/images/ant.png"
+import shelter from "../assets/images/shelter.png"
+import food from "../assets/images/food.png"
 
 <link
   rel="stylesheet"
@@ -54,14 +57,25 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
+
 const Category = () => {
   const [products, setProduct] = useState([])
+  const querPa = new URLSearchParams(window.location.search);
+  const selectedCategory = querPa.get('category');
+  const [category, setCategory] = useState(selectedCategory)
 
 
   const fetchProducts = async () => {
     try {
       const res = await productService.getAllProducts();
-      setProduct(res.data);
+      const productsAll = res.data;
+
+      const filteredProducts = selectedCategory
+          ? productsAll.filter((products) => products.category === selectedCategory)
+          : productsAll;
+
+      setProduct(filteredProducts);
+
       console.log(res.data)
     } catch (error) {
       console.log(error);
@@ -69,8 +83,9 @@ const Category = () => {
   };
 
   useEffect(() => {
+    
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
   const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,13 +104,52 @@ const Category = () => {
     <div className="container-fluid">
 
       <div className="row">
-        <SideBar />
+      <nav className="col-md-2 sidebar text-center d-none d-md-block ">
+        <div className="sidebar-sticky ">
+          <h5>Category</h5>
+          <ul className="category-list">
+              <li className ="category-item">
+                <NavLink
+                    className={`nav-link ${category === 'ant' ? 'active' : 'notActive'}`}
+                    to="/shop/?category=ant"
+                    
+                    
+                  >
+                    <img src={ant} class="icon" alt='ant'/> Ants
+                  </NavLink>
+                </li>
+                  
+
+              <li className ="category-item">
+              <NavLink
+                    className={`nav-link ${category === 'tank' ? 'active' : 'notActive'}`}
+                    to="/shop/?category=tank"
+                    
+                  >
+                    <img src={shelter} class="icon" alt='Tank'/> Tank
+                  </NavLink>
+              </li>
+
+              <li className ="category-item">
+              <NavLink
+                    className={`nav-link ${category === 'supply' ? 'active' : 'notActive'}`}
+                    to="/shop/?category=supply"
+                    
+                  >
+                    <img src={food} class="icon" alt='Supply'/> Supply
+                  </NavLink>
+              </li>
+          </ul>
+        </div>
+      </nav>
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
           <h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/shop">Shopping</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="/ants">Ants</a></li>
+                <li class="breadcrumb-item"><a href="/shop">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <NavLink to={`/?category=${selectedCategory}`}>{selectedCategory}</NavLink>
+                </li>
               </ol>
             </nav>
           </h3>
