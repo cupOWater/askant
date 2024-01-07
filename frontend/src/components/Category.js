@@ -16,7 +16,6 @@ import food from "../assets/images/food.png"
 
 //Product List Design
 const ProductsList = ({ products }) => {
-  console.log(products);
   return (
     <div className="row">
       {products.map((product, index) => (
@@ -72,6 +71,7 @@ const Category = () => {
       const res = await productService.getAllProducts();
       const productsAll = res.data;
 
+      // Filter products by category
       const filteredProducts = selectedCategory
           ? productsAll.filter((products) => products.category === selectedCategory)
           : productsAll;
@@ -87,6 +87,7 @@ const Category = () => {
   // Force page to refresh when choose an category
   const handleCategoryChange = (newCategory) => {
     setCategory(newCategory);
+    setCurrentPage(1);
     setRerender((prev) => !prev);
   }
 
@@ -101,7 +102,6 @@ const Category = () => {
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-
   const displayedProducts = products.slice(startIndex, endIndex);
 
   // When user change the page
@@ -113,9 +113,11 @@ const Category = () => {
   return (
     <div className="container-fluid">
       <div className="row">
+        {/* Side bar design */}
       <nav className="col-md-2 sidebar text-center d-none d-md-block ">
         <div className="sidebar-sticky ">
           <h5>Category</h5>
+          {/* Category display */}
           <ul className="category-list">
               <li className ="category-item">
                 <Link
