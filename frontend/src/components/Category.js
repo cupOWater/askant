@@ -154,8 +154,8 @@ const Category = () => {
           </ul>
         </div>
       </nav>
-        <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <h3>
+        <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4 mt-3">
+          <h3 style={{marginBottom: -50}}>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
                 <li className="breadcrumb-item"><a href="/shop">Shop</a></li>
