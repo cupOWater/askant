@@ -15,6 +15,7 @@ import Post from "./components/Post";
 import { useEffect, useState } from "react";
 import { userService } from "./service/userService";
 import Category from "./components/Category";
+import Footer from "./components/Footer";
 
 function App() {
   const [user, setUser] = useState();
@@ -38,8 +39,9 @@ function App() {
           <Route exact path="/" element={<ForumHome user={user}/>} />
           <Route exact path="/:postId" element={<PostDetail user={user}/>} />
           <Route exact path="/post" element={<Post user={user}/>} />
+          
           <Route exact path="/shop" element={<Category />} />
-
+          <Route exact path="/shop/:category" component={Category} />
 
           <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />
           <Route exact path="/register" element={<Register setUser={setUser} />} />
@@ -49,7 +51,8 @@ function App() {
           <Route path='/admin' element={(true) ? <Admin /> : <Unauthorized />} />
         </Routes>
       </div>
-     
+
+     <Footer />
     </Router>
   );
 }
