@@ -17,7 +17,10 @@ function ForumHome({ user }) {
   const fetchPosts = async () => {
     try {
       const res = await postService.getAllPosts();
-      setPosts(res.data);
+      const sortedPosts = res.data.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      setPosts(sortedPosts);
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +40,6 @@ function ForumHome({ user }) {
   }, []);
 
   useEffect(() => { // must load the posts from server & refresh when the sorting way is changed
-    
     if (user !== undefined && user.type === 'admin') {
       fetchPendingUsers();
     }
