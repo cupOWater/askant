@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "../assets/styles/category.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { productService } from '../service/productService';
@@ -16,6 +16,7 @@ import food from "../assets/images/food.png"
 
 //Product List Design
 const ProductsList = ({ products }) => {
+  console.log(products);
   return (
     <div className="row">
       {products.map((product, index) => (
@@ -39,6 +40,7 @@ const ProductsList = ({ products }) => {
 };
 
 // Pagination Design
+
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
