@@ -41,6 +41,7 @@ class PostController {
       category: category,
       comments: []
     }
+    
     const updatedPost = await Post.create(newPost);
     return res.status(201).send("Post created successfully");
   }
