@@ -39,15 +39,11 @@ function App() {
           <Route exact path="/" element={<ForumHome user={user}/>} />
           <Route exact path="/:postId" element={<PostDetail user={user}/>} />
           <Route exact path="/post" element={<Post user={user}/>} />
-          
           <Route exact path="/shop" element={<Category />} />
           <Route exact path="/shop/:category" component={Category} />
-
-          <Route exact path="/logIn" element={<LogIn setUser={setUser} />} />
+          <Route exact path="/login" element={<LogIn setUser={setUser} />} />
           <Route exact path="/register" element={<Register setUser={setUser} />} />
-
           <Route path='/unauth' element={<Unauthorized />} />
-
           <Route path='/admin' element={(true) ? <Admin /> : <Unauthorized />} />
         </Routes>
       </div>

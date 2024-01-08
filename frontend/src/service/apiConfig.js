@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create(
     {
-        baseURL: "http://localhost:2222",
+        baseURL: "http://localhost:2222/api",
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
     }
@@ -33,7 +33,7 @@ instance.interceptors.response.use(
         if (error.response.status === 401 && !originalReq._retry) {
             originalReq._retry = true;
             try {
-                const aToken = await axios.post("http://localhost:2222/auth/refresh", {}, { withCredentials: true })
+                const aToken = await axios.post("http://localhost:2222/api/auth/refresh", {}, { withCredentials: true })
                 localStorage.setItem("aToken", aToken.data);
                 return instance(originalReq);
             } catch (err) {

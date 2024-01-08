@@ -6,10 +6,10 @@ const imageRoute = require("./ImageRoute");
 
 function route(app) {
     app.use('/image', imageRoute);
-    app.use('/auth', authRoute);
-    app.use('/user', userRoute);
-    app.use('/product', productRoute);
-    app.use('/post', postRoute);
+    app.use('/api/auth', authRoute);
+    app.use('/api/user', userRoute);
+    app.use('/api/product', productRoute);
+    app.use('/api/post', postRoute);
 }
 
 module.exports = route;

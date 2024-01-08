@@ -33,8 +33,8 @@ function Header({ user, setUser }) { // userType : "" -> Guest, "User" -> User
                     <div className="headerRight">
                         {(!user) ?
                             <>
-                                <li className="headerRightItem fst-normal"><a href="/register"><button type="button" className="btn btn-outline-success fst-normal">Sign up</button></a></li>
-                                <li className="headerRightItem fst-normal"><a href="/LogIn"><button type="button" className="btn btn-outline-warning fst-normal">Log In</button></a></li>
+                                <li className="headerRightItem fst-normal"><Link to={"/register"}><button type="button" className="btn btn-outline-success fst-normal">Sign up</button></Link></li>
+                                <li className="headerRightItem fst-normal"><Link to={"/login"}><button type="button" className="btn btn-outline-warning fst-normal">Log In</button></Link></li>
                             </>
                             :
                             <>
