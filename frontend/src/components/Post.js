@@ -29,7 +29,7 @@ const modules = {
                 const formData = new FormData();
                 formData.append("file", file);
                 fetch(
-                    "http://localhost:2222/api/image/upload",
+                    "https://askant.onrender.com/api/image/upload",
                     {
                         method: "POST",
                         body: formData
