@@ -1,3 +1,4 @@
+import React from 'react';
 import phone from "../assets/images/phone.png"
 import github from "../assets/images/github.png"
 import facebook from "../assets/images/facebook.png"
@@ -18,7 +19,6 @@ const Footer = () => {
                             <span><img src={mail} class="icon-left" /> askant@gmail.com</span>
                         </p>
                     </div>
-
                     <div className="col-md-6">
                         <h5>Follow Us</h5>
                         <ul>
@@ -33,4 +33,4 @@ const Footer = () => {
         </footer >
     )
 }
-export default Footer
+export default Footer;
