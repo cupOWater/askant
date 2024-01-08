@@ -20,7 +20,7 @@ class ImageController {
             if(err){
                 return res.status(500).send("Something went wrong");
             }else {
-                return res.status(200).send({url: `http://localhost:2222/image/${fileName}`});
+                return res.status(200).send({url: `https://askant.onrender.com/api/image/${fileName}`});
             }
         })
     }
