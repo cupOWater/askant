@@ -216,7 +216,7 @@ function ForumHome({ user }) {
             ) : (
               <>
                 <div className="top-menu">
-                  <div className="dropdown-menu">
+                <div className="dropdown-menus">
                     <select className="btn btn-secondary dropdown-toggle" value={sortBy} onChange={(e) => handleSortChange(e.target.value)}>
                       <option value="latest">Latest</option>
                       <option value="comments">Comments</option>
