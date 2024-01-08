@@ -23,7 +23,8 @@ const AutoBot = () => {
         useSessionStorage: true,
         showPoweredBy: true,
         theme: "prism",
-        themeColor: "#B00C0C"
+        themeColor: "#B00C0C",
+        closeOnEscape: true
       });
     };
   }, []);
