@@ -1,5 +1,5 @@
 const http = require('http');
-const app = require("./api")
+const app = require("./App")
 const server = http.createServer(app);
 const schedule = require('node-schedule');
 const scrape = require('./controller/scrape');
