@@ -12,7 +12,8 @@ Quill.register('modules/imageUploader', ImageUploader);
 const modules = {
     toolbar: {
         container: [
-            [{ 'header': [3, 4, 5, 6, false] }],
+            [{ 'header': [1, 2, 3, 4, false] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
             ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
             ['link', 'image'],
