@@ -231,8 +231,8 @@ function ForumHome({ user }) {
                         <div key={post._id} className="posts-container">
                             <div className="post-content">
                               <div className="title-comments">
-                                <Link to={`/${post._id}`} state={{post}} className="post-title-link">
-                                  <h3 className="post-title">{post.title}</h3>
+                                <Link to={`/${post._id}`} state={{post}} className="post-title">
+                                  <h3>{post.title}</h3>
                                 </Link>
                                 <p className='post-comments text-decoration-underline'>[{post.comments.length}]</p>
                               </div>

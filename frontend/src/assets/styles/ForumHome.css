@@ -200,7 +200,7 @@
     text-decoration: none;
 }
 
-.post-title-link:hover {
+.post-title:hover {
     text-decoration: underline;
     cursor: pointer;
 }
