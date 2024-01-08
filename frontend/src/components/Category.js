@@ -116,7 +116,7 @@ const Category = () => {
     <div className="container-fluid">
       <div className="row">
         {/* Side bar design */}
-      <nav className="col-md-2 sidebar text-center d-none d-md-block ">
+      <nav className="col-md-2 side-bar text-center d-none d-md-block ">
         <div className="sidebar-sticky ">
           <h5>Category</h5>
           {/* Category display */}
